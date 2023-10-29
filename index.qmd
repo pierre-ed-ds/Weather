@@ -7,14 +7,17 @@ title: "Météo Montpellier"
 
 import numpy as np
 import matplotlib.pyplot as plt
+import requests
+import datetime
+import pooch
+from dateutil.relativedelta import relativedelta
+start_date = datetime.datetime.now()
+end_date = start_date + relativedelta(days=7)
+print(start_date)
+print(end_date)
+url = pooch.retrieve(f"https://open-meteo.com/en/docs/meteofrance-api#hourly=temperature_2m,precipitation,rain,windspeed_10m,windspeed_20m,windspeed_50m,windspeed_100m,windspeed_150m,windspeed_200m&past_days=3&start_date={start_date}&end_date={end_date}&time_mode=time_interval",known_hash=None)
 
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
+
+#response = requests.get(url)
+#data = response.json()
 ```
