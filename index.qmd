@@ -13,9 +13,30 @@ import pooch
 from dateutil.relativedelta import relativedelta
 start_date = datetime.datetime.now()
 end_date = start_date + relativedelta(days=7)
-print(start_date)
-print(end_date)
-url = pooch.retrieve(f"https://open-meteo.com/en/docs/meteofrance-api#hourly=temperature_2m,precipitation,rain,windspeed_10m,windspeed_20m,windspeed_50m,windspeed_100m,windspeed_150m,windspeed_200m&past_days=3&start_date={start_date}&end_date={end_date}&time_mode=time_interval",known_hash=None)
+
+debut=""
+if (start_date.month <10 and start_date.day <10):
+    debut = f"{start_date.year}-0{start_date.month}-0{start_date.day}"
+elif start_date.day <10:
+    debut = f"{start_date.year}-{start_date.month}-0{start_date.day}"
+elif start_date.month <10:
+    debut = f"{start_date.year}-0{start_date.month}-{start_date.day}"
+else:
+    debut = f"{start_date.year}-{start_date.month}-{start_date.day}"
+
+
+print(debut)
+fin=""
+if (end_date.month <10 and end_date.day <10):
+    fin = f"{end_date.year}-0{end_date.month}-0{end_date.day}"
+elif end_date.day <10:
+    fin = f"{end_date.year}-{end_date.month}-0{end_date.day}"
+elif start_date.month <10:
+    fin = f"{end_date.year}-0{end_date.month}-{end_date.day}"
+else:
+    fin = f"{end_date.year}-{end_date.month}-{end_date.day}"
+print(fin)
+#url = pooch.retrieve(f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,windspeed_10m,windspeed_20m,temperature_20m&start_date={debut}&end_date={fin}",known_hash=None)
 
 
 #response = requests.get(url)

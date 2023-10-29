@@ -167,21 +167,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dateutil.relativedelta <span class="im">import</span> relativedelta</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime.datetime.now()</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>end_date <span class="op">=</span> start_date <span class="op">+</span> relativedelta(days<span class="op">=</span><span class="dv">7</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(start_date)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(end_date)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> pooch.retrieve(<span class="ss">f"https://open-meteo.com/en/docs/meteofrance-api#hourly=temperature_2m,precipitation,rain,windspeed_10m,windspeed_20m,windspeed_50m,windspeed_100m,windspeed_150m,windspeed_200m&amp;past_days=3&amp;start_date=</span><span class="sc">{</span>start_date<span class="sc">}</span><span class="ss">&amp;end_date=</span><span class="sc">{</span>end_date<span class="sc">}</span><span class="ss">&amp;time_mode=time_interval"</span>,known_hash<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#response = requests.get(url)</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#data = response.json()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Downloading data from 'https://open-meteo.com/en/docs/meteofrance-api#hourly=temperature_2m,precipitation,rain,windspeed_10m,windspeed_20m,windspeed_50m,windspeed_100m,windspeed_150m,windspeed_200m&amp;past_days=3&amp;start_date=2023-10-29 18:08:07.272546&amp;end_date=2023-11-05 18:08:07.272546&amp;time_mode=time_interval' to file 'C:\Users\pierr\AppData\Local\pooch\pooch\Cache\c112e0ce1dd533bc985dcfcf4bf4d199-meteofrance-api'.
-SHA256 hash of downloaded file: 1b56119ab86b85ca3c1fbd2cc1043a173f187eaa885b7f9b9b60bc4ff5d5c780
-Use this value as the 'known_hash' argument of 'pooch.retrieve' to ensure that the file hasn't changed if it is downloaded again in the future.</code></pre>
-</div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>debut<span class="op">=</span><span class="st">""</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (start_date.month <span class="op">&lt;</span><span class="dv">10</span> <span class="kw">and</span> start_date.day <span class="op">&lt;</span><span class="dv">10</span>):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>start_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>start_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>start_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> start_date.day <span class="op">&lt;</span><span class="dv">10</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>start_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>start_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>start_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> start_date.month <span class="op">&lt;</span><span class="dv">10</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>start_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>start_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>start_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>start_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>start_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>start_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(debut)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>fin<span class="op">=</span><span class="st">""</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (end_date.month <span class="op">&lt;</span><span class="dv">10</span> <span class="kw">and</span> end_date.day <span class="op">&lt;</span><span class="dv">10</span>):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    fin <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>end_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>end_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>end_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> end_date.day <span class="op">&lt;</span><span class="dv">10</span>:</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    fin <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>end_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>end_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>end_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> start_date.month <span class="op">&lt;</span><span class="dv">10</span>:</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    fin <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>end_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-0</span><span class="sc">{</span>end_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>end_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    fin <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>end_date<span class="sc">.</span>year<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>end_date<span class="sc">.</span>month<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>end_date<span class="sc">.</span>day<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fin)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">#url = pooch.retrieve(f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&amp;longitude=3.8833&amp;hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,windspeed_10m,windspeed_20m,temperature_20m&amp;start_date={debut}&amp;end_date={fin}",known_hash=None)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#response = requests.get(url)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#data = response.json()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-10-29 18:08:07.272546
-2023-11-05 18:08:07.272546</code></pre>
+<pre><code>2023-10-29
+2023-11-05</code></pre>
 </div>
 <figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption>
 </figure>
