@@ -2,8 +2,6 @@
 title: "Météo Montpellier"
 ---
 ```{python}
-#| label: fig-polar
-#| fig-cap: "A line plot on a polar axis"
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,8 +9,8 @@ import requests
 import datetime
 import pooch
 from dateutil.relativedelta import relativedelta
-start_date = datetime.datetime.now()
-end_date = start_date + relativedelta(days=1)
+start_date = datetime.datetime.now() - relativedelta(days=3)
+end_date = start_date + relativedelta(days=6)
 
 debut=""
 if (start_date.month <10 and start_date.day <10):
@@ -43,4 +41,22 @@ url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833
 response = requests.get(url)
 data = response.json()
 print(data)
+degres=data['hourly']['temperature_2m']
+ressenti=data['hourly']['apparent_temperature']
+humidite=data['hourly']['relativehumidity_2m']
+pluie=data['hourly']['precipitation']
+neige=data['hourly']['snowfall']
+vent=data['hourly']['windspeed_10m']
+
+print(len(degres))
+tabdegres = np.zeros((7,24))
+k=0
+for i in range(7):
+    for j in range(24):
+        tabdegres[i,j]= degres[k]
+        k+=1
+
+for i in range(7):
+    print(i-2,min(tabdegres[i]),max(tabdegres[i]))
+
 ```
