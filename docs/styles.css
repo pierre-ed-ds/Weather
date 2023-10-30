@@ -2,11 +2,11 @@
 /* Alternance de couleur */
 
 tbody tr:nth-child(odd) {
-    background-color: #8dbe90;
+    background-color: #dfffe1;
   }
   
   tbody tr:nth-child(even) {
-    background-color: #a7bfac;
+    background-color: #90c79a51;
   }
   
   /*tbody tr {
@@ -14,5 +14,5 @@ tbody tr:nth-child(odd) {
   }*/
   
   table {
-    background-color: #b7cfa6;
+    background-color: #e0e0e0;
   }

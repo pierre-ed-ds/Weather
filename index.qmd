@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import requests
 import datetime
 import pooch
+import PIL as Image
+import statistics
 from dateutil.relativedelta import relativedelta
 start_date = datetime.datetime.now() - relativedelta(days=3)
 end_date = start_date + relativedelta(days=6)
@@ -36,7 +38,7 @@ else:
     fin = f"{end_date.year}-{end_date.month}-{end_date.day}"
 
 print(fin)
-url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,windspeed_10m,windspeed_20m,temperature_20m&start_date={debut}&end_date={fin}"
+url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&start_date={debut}&end_date={fin}"
 
 
 response = requests.get(url)
@@ -48,8 +50,10 @@ humidite=data['hourly']['relativehumidity_2m']
 pluie=data['hourly']['precipitation']
 neige=data['hourly']['snowfall']
 vent=data['hourly']['windspeed_10m']
+codeimage=data['hourly']['weathercode']
 
-print(len(degres))
+print(codeimage)
+tabcode = np.zeros((7,24))
 tabdegres = np.zeros((7,24))
 k=0
 for i in range(7):
@@ -61,6 +65,17 @@ maxtemp=np.zeros(7)
 for i in range(7):
     mintemp[i]=min(tabdegres[i])
     maxtemp[i]=max(tabdegres[i])
+
+medcode=np.zeros(7)
+k=0
+for i in range(7):
+    for j in range(24):
+        tabcode[i,j]= codeimage[k]
+        k+=1
+
+for i in range(7): 
+    medcode[i]=statistics.median(tabcode[i])
+
 
 def inttoday(i):
     if ((datetime.datetime.now().weekday() + i)%7 ==0):
@@ -79,23 +94,69 @@ def inttoday(i):
         return 'Dimanche'
 #| label: tbl-planets
 #| tbl-cap: Astronomical object
+def imgcode(i):
+    if (medcode[i]==0):
+        return 'iconsmeteo/Sun-thin.svg'
+    elif (medcode[i]==1 or medcode[i]==2):
+        return 'iconsmeteo/PartlySunny-thin.svg'
+    elif (medcode[i]==3):
+        return 'iconsmeteo/Cloud-thin.svg'
 
 from IPython.display import Markdown
+from IPython.display import HTML
 from tabulate import tabulate
-table = [[mintemp[0],mintemp[1],mintemp[2],mintemp[3],mintemp[4],mintemp[5],mintemp[6]],
-         [maxtemp[0],maxtemp[1],maxtemp[2],maxtemp[3],maxtemp[4],maxtemp[5],maxtemp[6]],
-         [0,0,0,0,0,0,0],
-         [0,0,0,0,0,0,0]]
-Markdown(tabulate(
-  table, 
-  headers=[inttoday(-2),"Hier","Aujourd'hui","Demain",inttoday(2),inttoday(3),inttoday(4)]
-))
+res=f"""
+<table border="1">
+    <tr>  
+        <th> Jours </th>
+        <th>  {inttoday(-2)}</th>
+        <th>  Hier</th>
+        <th>  Aujourd'hui</th>
+        <th>  Demain</th>
+        <th>  {inttoday(2)}</th>
+        <th>  {inttoday(3)}</th>
+        <th>  {inttoday(4)}</th>
+    </tr>
+    <tr> 
+        <td>  icone</td>
+        <td> <img src={imgcode(0)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcode(1)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcode(2)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcode(3)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcode(4)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcode(5)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcode(6)} width="50"
+  height="50" /> </td>
+    </tr>
+    <tr> 
+        <td>  température maximale</td>
+        <td> {maxtemp[0]} </td>
+        <td> {maxtemp[1]} </td>
+        <td> {maxtemp[2]} </td>
+        <td> {maxtemp[3]} </td>
+        <td> {maxtemp[4]} </td>
+        <td> {maxtemp[5]} </td>
+        <td> {maxtemp[6]} </td>
+    </tr>
+    <tr> 
+        <td>  température minimale</td>
+        <td> {mintemp[0]} </td>
+        <td> {mintemp[1]} </td>
+        <td> {mintemp[2]} </td>
+        <td> {mintemp[3]} </td>
+        <td> {mintemp[4]} </td>
+        <td> {mintemp[5]} </td>
+        <td> {mintemp[6]} </td>
+    </tr>
 
+
+</table>
+"""
+display(HTML(res))
 ```
-| Default | Left | Right | Center |
-|---------|:-----|------:|:------:|
-| tabdegres[i][1]      | 12   |    12 |   12   |
-| 123     | 123  |   123 |  123   |
-| 1       | 1    |     1 |   1    |
-
-: Demonstration of pipe table syntax
