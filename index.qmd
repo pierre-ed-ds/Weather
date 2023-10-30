@@ -60,5 +60,40 @@ for i in range(7):
 for i in range(7):
     print(i-2,min(tabdegres[i]),max(tabdegres[i]))
 
+def inttoday(i):
+    if ((datetime.datetime.now().weekday() + i)%7 ==0):
+        return 'Lundi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==1):
+        return 'Mardi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==2):
+        return 'Mercredi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==3):
+        return 'Jeudi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==4):
+        return 'Vendredi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==5):
+        return 'Samedi'
+    else:
+        return 'Dimanche'
+#| label: tbl-planets
+#| tbl-cap: Astronomical object
+
+from IPython.display import Markdown
+from tabulate import tabulate
+table = [["Sun","696,000",1.989e30,0,0,0,0],
+         ["Earth","6,371",5.972e24,0,0,0,0],
+         ["Moon","1,737",7.34e22,0,0,0,0],
+         ["Mars","3,390",6.39e23,0,0,0,0]]
+Markdown(tabulate(
+  table, 
+  headers=[inttoday(-2),"Hier","Aujourd'hui","Demain",inttoday(2),inttoday(3),inttoday(4)]
+))
 
 ```
+| Default | Left | Right | Center |
+|---------|:-----|------:|:------:|
+| tabdegres[i][1]      | 12   |    12 |   12   |
+| 123     | 123  |   123 |  123   |
+| 1       | 1    |     1 |   1    |
+
+: Demonstration of pipe table syntax
