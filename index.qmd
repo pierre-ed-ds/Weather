@@ -26,7 +26,6 @@ else:
     debut = f"{start_date.year}-{start_date.month}-{start_date.day}"
 
 
-print(debut)
 fin=""
 if (end_date.month <10 and end_date.day <10):
     fin = f"{end_date.year}-0{end_date.month}-0{end_date.day}"
@@ -37,13 +36,11 @@ elif start_date.month <10:
 else:
     fin = f"{end_date.year}-{end_date.month}-{end_date.day}"
 
-print(fin)
 url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&start_date={debut}&end_date={fin}"
 
 
 response = requests.get(url)
 data = response.json()
-print(data)
 degres=data['hourly']['temperature_2m']
 ressenti=data['hourly']['apparent_temperature']
 humidite=data['hourly']['relativehumidity_2m']
@@ -52,9 +49,10 @@ neige=data['hourly']['snowfall']
 vent=data['hourly']['windspeed_10m']
 codeimage=data['hourly']['weathercode']
 
-print(codeimage)
-tabcode = np.zeros((7,24))
+
+
 tabdegres = np.zeros((7,24))
+
 k=0
 for i in range(7):
     for j in range(24):
@@ -66,6 +64,7 @@ for i in range(7):
     mintemp[i]=min(tabdegres[i])
     maxtemp[i]=max(tabdegres[i])
 
+tabcode = np.zeros((7,24))
 medcode=np.zeros(7)
 k=0
 for i in range(7):
@@ -74,8 +73,30 @@ for i in range(7):
         k+=1
 
 for i in range(7): 
-    medcode[i]=statistics.median(tabcode[i])
+    medcode[i]=max(tabcode[i])
+    #medcode[i]=statistics.median(tabcode[i])
 
+tabvent = np.zeros((7,24))
+maxvent = np.zeros(7)
+k=0
+for i in range(7):
+    for j in range(24):
+        tabvent[i,j]= vent[k]
+        k+=1
+
+for i in range(7): 
+    maxvent[i]=max(tabvent[i])
+
+tabpluie = np.zeros((7,24))
+sumpluie = np.zeros(7)
+k=0
+for i in range(7):
+    for j in range(24):
+        tabpluie[i,j]= pluie[k]
+        k+=1
+
+for i in range(7): 
+    sumpluie[i]=sum(tabpluie[i])
 
 def inttoday(i):
     if ((datetime.datetime.now().weekday() + i)%7 ==0):
@@ -101,6 +122,14 @@ def imgcode(i):
         return 'iconsmeteo/PartlySunny-thin.svg'
     elif (medcode[i]==3):
         return 'iconsmeteo/Cloud-thin.svg'
+    elif (45<=medcode[i]<=57):
+        return 'iconsmeteo/Haze-thin.svg'
+    elif (61<=medcode[i]<=67 or 80<=medcode[i]<=82):
+        return 'iconsmeteo/Rain-thin.svg'
+    elif (71<=medcode[i]<=77 or 85<=medcode[i]<=86):
+        return 'iconsmeteo/Snow-thin.svg'
+    elif (95<=medcode[i]<=99):
+        return 'iconsmeteo/Storm-thin.svg'
 
 from IPython.display import Markdown
 from IPython.display import HTML
@@ -139,23 +168,43 @@ res=f"""
     </tr>
     <tr> 
         <td>  température maximale</td>
-        <td> {maxtemp[0]} </td>
-        <td> {maxtemp[1]} </td>
-        <td> {maxtemp[2]} </td>
-        <td> {maxtemp[3]} </td>
-        <td> {maxtemp[4]} </td>
-        <td> {maxtemp[5]} </td>
-        <td> {maxtemp[6]} </td>
+        <td> {maxtemp[0]}°C </td>
+        <td> {maxtemp[1]}°C </td>
+        <td> {maxtemp[2]}°C </td>
+        <td> {maxtemp[3]}°C </td>
+        <td> {maxtemp[4]}°C </td>
+        <td> {maxtemp[5]}°C </td>
+        <td> {maxtemp[6]}°C </td>
     </tr>
     <tr> 
         <td>  température minimale</td>
-        <td> {mintemp[0]} </td>
-        <td> {mintemp[1]} </td>
-        <td> {mintemp[2]} </td>
-        <td> {mintemp[3]} </td>
-        <td> {mintemp[4]} </td>
-        <td> {mintemp[5]} </td>
-        <td> {mintemp[6]} </td>
+        <td> {mintemp[0]}°C </td>
+        <td> {mintemp[1]}°C </td>
+        <td> {mintemp[2]}°C </td>
+        <td> {mintemp[3]}°C </td>
+        <td> {mintemp[4]}°C </td>
+        <td> {mintemp[5]}°C </td>
+        <td> {mintemp[6]}°C </td>
+    </tr>
+    <tr> 
+        <td> Vitesse de vent maximale </td>
+        <td> {maxvent[0]}km/h </td>
+        <td> {maxvent[1]}km/h </td>
+        <td> {maxvent[2]}km/h </td>
+        <td> {maxvent[3]}km/h </td>
+        <td> {maxvent[4]}km/h </td>
+        <td> {maxvent[5]}km/h </td>
+        <td> {maxvent[6]}km/h </td>
+    </tr>
+    <tr> 
+        <td> Précipitations </td>
+        <td> {sumpluie[0]}mm </td>
+        <td> {sumpluie[1]}mm </td>
+        <td> {sumpluie[2]}mm </td>
+        <td> {sumpluie[3]}mm </td>
+        <td> {sumpluie[4]}mm </td>
+        <td> {sumpluie[5]}mm </td>
+        <td> {sumpluie[6]}mm </td>
     </tr>
     </tbody>
 
