@@ -1,7 +1,20 @@
 /* css styles */
 /* Alternance de couleur */
 
-tbody tr:nth-child(odd) {
+  .table1-style {
+    border-collapse: collapse;
+    min-width: 400px;
+    width: auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    margin: 20px auto;
+    border: 2px #2f4834;
+  }
+  thead tr{
+    background-color: #8cca90;
+    color: black;
+  }
+  tbody tr:nth-child(odd) {
     background-color: #dfffe1;
   }
   
@@ -13,6 +26,4 @@ tbody tr:nth-child(odd) {
     background-image: url(noise.png);
   }*/
   
-  table {
-    background-color: #e0e0e0;
-  }
+  

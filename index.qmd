@@ -106,17 +106,20 @@ from IPython.display import Markdown
 from IPython.display import HTML
 from tabulate import tabulate
 res=f"""
-<table border="1">
+<table class= "table1-style">
+    <thead>
     <tr>  
-        <th> Jours </th>
-        <th>  {inttoday(-2)}</th>
-        <th>  Hier</th>
-        <th>  Aujourd'hui</th>
-        <th>  Demain</th>
-        <th>  {inttoday(2)}</th>
-        <th>  {inttoday(3)}</th>
-        <th>  {inttoday(4)}</th>
+        <th style = "text-align : center"> Jours </th>
+        <th style = "text-align : center">  {inttoday(-2)}</th>
+        <th style = "text-align : center">  Hier</th>
+        <th style = "text-align : center">  Aujourd'hui</th>
+        <th style = "text-align : center">  Demain</th>
+        <th style = "text-align : center">  {inttoday(2)}</th>
+        <th style = "text-align : center">  {inttoday(3)}</th>
+        <th style = "text-align : center">  {inttoday(4)}</th>
     </tr>
+    </thead>
+    <tbody>
     <tr> 
         <td>  icone</td>
         <td> <img src={imgcode(0)} width="50"
@@ -154,7 +157,7 @@ res=f"""
         <td> {mintemp[5]} </td>
         <td> {mintemp[6]} </td>
     </tr>
-
+    </tbody>
 
 </table>
 """
