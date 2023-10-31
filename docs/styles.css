@@ -1,23 +1,22 @@
 /* css styles */
 /* Alternance de couleur */
 
-  .today{
-    border: 5px solid #ff0404;
-  }
 
   .table1-style {
     border-collapse: collapse;
     min-width: 400px;
     width: auto;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    /*box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);*/
     cursor: pointer;
     margin: 10px;
-    border: 2px #2f4834;
+    background-color : rgba(255, 255, 255, 0);
+    /*border: 2px #2f4834;*/
   }
   thead tr{
     background-color: #8cca9070;
     color: black;
     text-align: center;
+    
   }
 
   tbody,tr,td,th {
@@ -25,9 +24,12 @@
     text-align: center;
     vertical-align: middle;
     padding: 30px 30px;
+    
+    
   }
   tbody tr:nth-child(odd) {
     background-color: #dfffe14a;
+    
   }
   
   tbody tr:nth-child(even) {

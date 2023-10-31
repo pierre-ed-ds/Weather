@@ -175,14 +175,14 @@ res=f"""
 <table class= "table1-style">
     <thead>
     <tr>  
-        <th > Jours </th>
-        <th >  {inttoday(-2)}</th>
-        <th >  Hier</th>
-        <th style="border-top:2px solid rgb(65, 220, 119,0.5);border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)">  Aujourd'hui</th>
-        <th >  Demain</th>
-        <th >  {inttoday(2)}</th>
-        <th >  {inttoday(3)}</th>
-        <th >  {inttoday(4)}</th>
+        <th  style="border-top-left-radius : 20px 20px"> Jours </th>
+        <th>  {inttoday(-2)}</th>
+        <th>  Hier</th>
+        <th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)">  Aujourd'hui</th>
+        <th>  Demain</th>
+        <th>  {inttoday(2)}</th>
+        <th>  {inttoday(3)}</th>
+        <th  style="border-top-right-radius : 20px 20px" >  {inttoday(4)}</th>
     </tr>
     </thead>
     <tbody>
@@ -192,7 +192,7 @@ res=f"""
   height="50" /> </td>
         <td> <img src={imgcodeday(1)} width="50"
   height="50" /> </td>
-        <td style="border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)"> <img src={imgcodeday(2)} width="50"
+        <td style="border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> <img src={imgcodeday(2)} width="50"
   height="50" /> </td>
         <td> <img src={imgcodeday(3)} width="50"
   height="50" /> </td>
@@ -207,17 +207,17 @@ res=f"""
         <td>  température maximale</td>
         <td style =" background-color : {couleur(maxtemp[0])}; font-weight: bold;" > {maxtemp[0]}°C </td>
         <td style =" background-color : {couleur(maxtemp[1])};font-weight: bold;" > {maxtemp[1]}°C </td>
-        <td style =" background-color : {couleur(maxtemp[2])};font-weight: bold;border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)" > {maxtemp[2]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[2])};font-weight: bold;border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)" > {maxtemp[2]}°C </td>
         <td style =" background-color : {couleur(maxtemp[3])};font-weight: bold;" > {maxtemp[3]}°C </td>
         <td style =" background-color : {couleur(maxtemp[4])};font-weight: bold;" > {maxtemp[4]}°C </td>
         <td style =" background-color : {couleur(maxtemp[5])};font-weight: bold;" > {maxtemp[5]}°C </td>
         <td style =" background-color : {couleur(maxtemp[6])};font-weight: bold;" > {maxtemp[6]}°C </td>
     </tr>
-    <tr> 
+    <tr > 
         <td>  température minimale</td>
         <td style =" background-color : {couleur(mintemp[0])};font-weight: bold;" > {mintemp[0]}°C </td>
         <td style =" background-color : {couleur(mintemp[1])};font-weight: bold;" > {mintemp[1]}°C </td>
-        <td style =" background-color : {couleur(mintemp[2])};font-weight: bold;border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)" > {mintemp[2]}°C </td>
+        <td style =" background-color : {couleur(mintemp[2])};font-weight: bold;border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)" > {mintemp[2]}°C </td>
         <td style =" background-color : {couleur(mintemp[3])};font-weight: bold;" > {mintemp[3]}°C </td>
         <td style =" background-color : {couleur(mintemp[4])};font-weight: bold;" > {mintemp[4]}°C </td>
         <td style =" background-color : {couleur(mintemp[5])};font-weight: bold;" > {mintemp[5]}°C </td>
@@ -227,21 +227,21 @@ res=f"""
         <td> Vitesse de vent maximale </td>
         <td> {maxvent[0]}km/h </td>
         <td> {maxvent[1]}km/h </td>
-        <td style="border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)"> {maxvent[2]}km/h </td>
+        <td style="border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {maxvent[2]}km/h </td>
         <td> {maxvent[3]}km/h </td>
         <td> {maxvent[4]}km/h </td>
         <td> {maxvent[5]}km/h </td>
         <td> {maxvent[6]}km/h </td>
     </tr>
     <tr> 
-        <td> Précipitations </td>
+        <td style="border-bottom-left-radius : 20px 20px"> Précipitations </td>
         <td> {sumpluie[0]}mm </td>
         <td> {sumpluie[1]}mm </td>
-        <td style="border-bottom:2px solid rgb(65, 220, 119,0.5);border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)"> {sumpluie[2]}mm </td>
+        <td style="border-bottom:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {sumpluie[2]}mm </td>
         <td> {sumpluie[3]}mm </td>
         <td> {sumpluie[4]}mm </td>
         <td> {sumpluie[5]}mm </td>
-        <td> {sumpluie[6]}mm </td>
+        <td style="border-bottom-right-radius : 20px 20px"> {sumpluie[6]}mm </td>
     </tr>
     </tbody>
 

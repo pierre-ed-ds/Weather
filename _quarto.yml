@@ -3,11 +3,11 @@ project:
   output-dir: docs
 
 website:
-  title: "MeteoMontpellier"
+  title: "Météo Montpellier"
   navbar:
     left:
       - href: index.qmd
-        text: Home
+        text: Prévisions
       - about.qmd
 
 format:
