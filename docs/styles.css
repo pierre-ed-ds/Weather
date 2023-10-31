@@ -1,6 +1,10 @@
 /* css styles */
 /* Alternance de couleur */
 
+  .today{
+    border: 5px solid #ff0404;
+  }
+
   .table1-style {
     border-collapse: collapse;
     min-width: 400px;
@@ -11,7 +15,7 @@
     border: 2px #2f4834;
   }
   thead tr{
-    background-color: #8cca90;
+    background-color: #8cca9070;
     color: black;
     text-align: center;
   }
@@ -23,7 +27,7 @@
     padding: 30px 30px;
   }
   tbody tr:nth-child(odd) {
-    background-color: #dfffe1;
+    background-color: #dfffe14a;
   }
   
   tbody tr:nth-child(even) {

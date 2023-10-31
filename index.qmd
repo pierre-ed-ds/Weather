@@ -36,7 +36,7 @@ elif start_date.month <10:
 else:
     fin = f"{end_date.year}-{end_date.month}-{end_date.day}"
 
-url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&start_date={debut}&end_date={fin}"
+url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&daily=weathercode,uv_index_max&timezone=Europe%2FLondon&start_date={debut}&end_date={fin}"
 
 
 response = requests.get(url)
@@ -48,6 +48,7 @@ pluie=data['hourly']['precipitation']
 neige=data['hourly']['snowfall']
 vent=data['hourly']['windspeed_10m']
 codeimage=data['hourly']['weathercode']
+codeimagetot=data['daily']['weathercode']
 
 
 
@@ -131,6 +132,42 @@ def imgcode(i):
     elif (95<=medcode[i]<=99):
         return 'iconsmeteo/Storm-thin.svg'
 
+
+def imgcodeday(i):
+    if (codeimagetot[i]==0):
+        return 'iconsmeteo/Sun-thin.svg'
+    elif (codeimagetot[i]==1 or codeimagetot[i]==2):
+        return 'iconsmeteo/PartlySunny-thin.svg'
+    elif (codeimagetot[i]==3):
+        return 'iconsmeteo/Cloud-thin.svg'
+    elif (45<=codeimagetot[i]<=57):
+        return 'iconsmeteo/Haze-thin.svg'
+    elif (61<=codeimagetot[i]<=67 or 80<=codeimagetot<=82):
+        return 'iconsmeteo/Rain-thin.svg'
+    elif (71<=codeimagetot<=77 or 85<=codeimagetot<=86):
+        return 'iconsmeteo/Snow-thin.svg'
+    elif (95<=codeimagetot<=99):
+        return 'iconsmeteo/Storm-thin.svg'
+
+def couleur(temp):
+    if (temp<=0):
+        return 'rgb(102, 183, 213,0.5)'
+    if (0<temp<=5):
+        return 'rgb(85, 215, 195,0.5)'
+    if (5<temp<=10):
+        return 'rgb(65, 220, 119,0.5)'
+    if (10<temp<=15):
+        return 'rgb(82, 226, 38,0.5)'
+    if (15<temp<=20):
+        return 'rgb(155, 227, 22,0.5)'
+    if (20<temp<=25):
+        return 'rgb(216, 186, 12,0.5)'
+    if (25<temp<=30):
+        return 'rgb(211, 113, 7,0.5)'
+    if (30<temp<=35):
+        return 'rgb(204, 61, 4,0.5)'
+    if (35<temp):
+        return 'rgb(201, 25, 2,0.5)'
 from IPython.display import Markdown
 from IPython.display import HTML
 from tabulate import tabulate
@@ -138,59 +175,59 @@ res=f"""
 <table class= "table1-style">
     <thead>
     <tr>  
-        <th> Jours </th>
-        <th>  {inttoday(-2)}</th>
-        <th>  Hier</th>
-        <th>  Aujourd'hui</th>
-        <th>  Demain</th>
-        <th>  {inttoday(2)}</th>
-        <th>  {inttoday(3)}</th>
-        <th>  {inttoday(4)}</th>
+        <th > Jours </th>
+        <th >  {inttoday(-2)}</th>
+        <th >  Hier</th>
+        <th style="border-top:2px solid rgb(65, 220, 119,0.5);border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)">  Aujourd'hui</th>
+        <th >  Demain</th>
+        <th >  {inttoday(2)}</th>
+        <th >  {inttoday(3)}</th>
+        <th >  {inttoday(4)}</th>
     </tr>
     </thead>
     <tbody>
     <tr> 
         <td>  icone</td>
-        <td> <img src={imgcode(0)} width="50"
+        <td> <img src={imgcodeday(0)} width="50"
   height="50" /> </td>
-        <td> <img src={imgcode(1)} width="50"
+        <td> <img src={imgcodeday(1)} width="50"
   height="50" /> </td>
-        <td> <img src={imgcode(2)} width="50"
+        <td style="border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)"> <img src={imgcodeday(2)} width="50"
   height="50" /> </td>
-        <td> <img src={imgcode(3)} width="50"
+        <td> <img src={imgcodeday(3)} width="50"
   height="50" /> </td>
-        <td> <img src={imgcode(4)} width="50"
+        <td> <img src={imgcodeday(4)} width="50"
   height="50" /> </td>
-        <td> <img src={imgcode(5)} width="50"
+        <td> <img src={imgcodeday(5)} width="50"
   height="50" /> </td>
-        <td> <img src={imgcode(6)} width="50"
+        <td> <img src={imgcodeday(6)} width="50"
   height="50" /> </td>
     </tr>
     <tr> 
         <td>  température maximale</td>
-        <td> {maxtemp[0]}°C </td>
-        <td> {maxtemp[1]}°C </td>
-        <td> {maxtemp[2]}°C </td>
-        <td> {maxtemp[3]}°C </td>
-        <td> {maxtemp[4]}°C </td>
-        <td> {maxtemp[5]}°C </td>
-        <td> {maxtemp[6]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[0])}; font-weight: bold;" > {maxtemp[0]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[1])};font-weight: bold;" > {maxtemp[1]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[2])};font-weight: bold;border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)" > {maxtemp[2]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[3])};font-weight: bold;" > {maxtemp[3]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[4])};font-weight: bold;" > {maxtemp[4]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[5])};font-weight: bold;" > {maxtemp[5]}°C </td>
+        <td style =" background-color : {couleur(maxtemp[6])};font-weight: bold;" > {maxtemp[6]}°C </td>
     </tr>
     <tr> 
         <td>  température minimale</td>
-        <td> {mintemp[0]}°C </td>
-        <td> {mintemp[1]}°C </td>
-        <td> {mintemp[2]}°C </td>
-        <td> {mintemp[3]}°C </td>
-        <td> {mintemp[4]}°C </td>
-        <td> {mintemp[5]}°C </td>
-        <td> {mintemp[6]}°C </td>
+        <td style =" background-color : {couleur(mintemp[0])};font-weight: bold;" > {mintemp[0]}°C </td>
+        <td style =" background-color : {couleur(mintemp[1])};font-weight: bold;" > {mintemp[1]}°C </td>
+        <td style =" background-color : {couleur(mintemp[2])};font-weight: bold;border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)" > {mintemp[2]}°C </td>
+        <td style =" background-color : {couleur(mintemp[3])};font-weight: bold;" > {mintemp[3]}°C </td>
+        <td style =" background-color : {couleur(mintemp[4])};font-weight: bold;" > {mintemp[4]}°C </td>
+        <td style =" background-color : {couleur(mintemp[5])};font-weight: bold;" > {mintemp[5]}°C </td>
+        <td style =" background-color : {couleur(mintemp[6])};font-weight: bold;" > {mintemp[6]}°C </td>
     </tr>
     <tr> 
         <td> Vitesse de vent maximale </td>
         <td> {maxvent[0]}km/h </td>
         <td> {maxvent[1]}km/h </td>
-        <td> {maxvent[2]}km/h </td>
+        <td style="border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)"> {maxvent[2]}km/h </td>
         <td> {maxvent[3]}km/h </td>
         <td> {maxvent[4]}km/h </td>
         <td> {maxvent[5]}km/h </td>
@@ -200,7 +237,7 @@ res=f"""
         <td> Précipitations </td>
         <td> {sumpluie[0]}mm </td>
         <td> {sumpluie[1]}mm </td>
-        <td> {sumpluie[2]}mm </td>
+        <td style="border-bottom:2px solid rgb(65, 220, 119,0.5);border-right:2px solid rgb(65, 220, 119,0.5);border-left:2px solid rgb(65, 220, 119,0.5)"> {sumpluie[2]}mm </td>
         <td> {sumpluie[3]}mm </td>
         <td> {sumpluie[4]}mm </td>
         <td> {sumpluie[5]}mm </td>
