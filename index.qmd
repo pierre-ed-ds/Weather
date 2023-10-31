@@ -2,6 +2,7 @@
 title: "Météo Montpellier"
 ---
 ```{python}
+#| column: page
 #| code-fold: true
 #| code-summary: "Dérouler le code"
 import numpy as np
@@ -12,9 +13,12 @@ import pooch
 import PIL as Image
 import statistics
 from dateutil.relativedelta import relativedelta
+
+#initialisation des dates de debut et fin d'extraction de données
 start_date = datetime.datetime.now() - relativedelta(days=3)
 end_date = start_date + relativedelta(days=6)
 
+#formatage des dates pour importer le bon URL
 debut=""
 if (start_date.month <10 and start_date.day <10):
     debut = f"{start_date.year}-0{start_date.month}-0{start_date.day}"
@@ -36,11 +40,14 @@ elif start_date.month <10:
 else:
     fin = f"{end_date.year}-{end_date.month}-{end_date.day}"
 
+#copie de l'URL du site open-meteo avec les differents critères qui nous interessent
 url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&daily=weathercode,uv_index_max&timezone=Europe%2FLondon&start_date={debut}&end_date={fin}"
 
-
+#récuperation des données
 response = requests.get(url)
 data = response.json()
+
+#initialisation des tableaux de données que nous allons utiliser
 degres=data['hourly']['temperature_2m']
 ressenti=data['hourly']['apparent_temperature']
 humidite=data['hourly']['relativehumidity_2m']
@@ -51,7 +58,7 @@ codeimage=data['hourly']['weathercode']
 codeimagetot=data['daily']['weathercode']
 
 
-
+#temperatures min et max pour chaques jours (il y avait la possibilité de les obtenir "daily" mais j'ai fait ainsi)
 tabdegres = np.zeros((7,24))
 
 k=0
@@ -77,6 +84,7 @@ for i in range(7):
     medcode[i]=max(tabcode[i])
     #medcode[i]=statistics.median(tabcode[i])
 
+#vent max pour chaques jours
 tabvent = np.zeros((7,24))
 maxvent = np.zeros(7)
 k=0
@@ -88,6 +96,7 @@ for i in range(7):
 for i in range(7): 
     maxvent[i]=max(tabvent[i])
 
+#précipitation totale par jours
 tabpluie = np.zeros((7,24))
 sumpluie = np.zeros(7)
 k=0
@@ -97,9 +106,12 @@ for i in range(7):
         k+=1
 
 for i in range(7): 
-    sumpluie[i]=sum(tabpluie[i])
+    sumpluie[i]=round(sum(tabpluie[i]),2)
 
 def inttoday(i):
+    '''
+    fonction permettant d'obtenir le nom du jour des jours de la semaines automatiquement, correspond à la première ligne du tableau.
+    '''
     if ((datetime.datetime.now().weekday() + i)%7 ==0):
         return 'Lundi'
     elif ((datetime.datetime.now().weekday()+i)%7 ==1):
@@ -116,11 +128,16 @@ def inttoday(i):
         return 'Dimanche'
 
 def date(i):
+    '''
+    Retourne une chaine de caractères correspondant au jour i, i étant l'offset de jour par rapport au présent.
+    '''
     date=datetime.datetime.now() + relativedelta(days=i)
     return f"{date.day}-{date.month}"
-#| label: tbl-planets
-#| tbl-cap: Astronomical object
+
 def imgcode(i):
+    '''
+    Association de chaques codes WBO à un pictogramme le correspondant. Retourne le chemin d'accès au pictogramme par une chaine de caractères. Version hourly.
+    '''
     if (medcode[i]==0):
         return 'iconsmeteo/Sun-thin.svg'
     elif (medcode[i]==1 or medcode[i]==2):
@@ -138,6 +155,9 @@ def imgcode(i):
 
 
 def imgcodeday(i):
+    '''
+    Association de chaques codes WBO à un pictogramme le correspondant. Retourne le chemin d'accès au pictogramme par une chaine de caractères. Version daily.
+    '''
     if (codeimagetot[i]==0):
         return 'iconsmeteo/Sun-thin.svg'
     elif (codeimagetot[i]==1 or codeimagetot[i]==2):
@@ -154,6 +174,9 @@ def imgcodeday(i):
         return 'iconsmeteo/Storm-thin.svg'
 
 def couleur(temp):
+    '''
+    Associe une couleur en fonction de la température sous le format RGB.
+    '''
     if (temp<=0):
         return 'rgb(102, 183, 213,0.5)'
     if (0<temp<=5):
@@ -172,9 +195,12 @@ def couleur(temp):
         return 'rgb(204, 61, 4,0.5)'
     if (35<temp):
         return 'rgb(201, 25, 2,0.5)'
+
 from IPython.display import Markdown
 from IPython.display import HTML
 from tabulate import tabulate
+
+#création du tableau en HTML pour pouvoir mettre les images et des couleurs
 res=f"""
 <table class= "table1-style">
     <thead>
