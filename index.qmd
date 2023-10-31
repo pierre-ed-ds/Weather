@@ -114,6 +114,10 @@ def inttoday(i):
         return 'Samedi'
     else:
         return 'Dimanche'
+
+def date(i):
+    date=datetime.datetime.now() + relativedelta(days=i)
+    return f"{date.day}-{date.month}"
 #| label: tbl-planets
 #| tbl-cap: Astronomical object
 def imgcode(i):
@@ -176,18 +180,18 @@ res=f"""
     <thead>
     <tr>  
         <th  style="border-top-left-radius : 20px 20px"> Jours </th>
-        <th>  {inttoday(-2)}</th>
-        <th>  Hier</th>
-        <th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)">  Aujourd'hui</th>
-        <th>  Demain</th>
-        <th>  {inttoday(2)}</th>
-        <th>  {inttoday(3)}</th>
-        <th  style="border-top-right-radius : 20px 20px" >  {inttoday(4)}</th>
+        <th>  {inttoday(-2)} <br> <small> {date(-2)} </small></th>
+        <th>  Hier <br> <small>{date(-1)}</small></th>
+        <th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)">  Aujourd'hui <br> <small>{date(0)}</small></th>
+        <th>  Demain <br> <small>{date(1)}</small></th>
+        <th>  {inttoday(2)} <br> <small>{date(2)}</small></th>
+        <th>  {inttoday(3)} <br> <small>{date(3)}</small></th>
+        <th  style="border-top-right-radius : 20px 20px" >  {inttoday(4)} <br> <small>{date(4)}</small></th>
     </tr>
     </thead>
     <tbody>
     <tr> 
-        <td>  icone</td>
+        <td>  Pictogramme</td>
         <td> <img src={imgcodeday(0)} width="50"
   height="50" /> </td>
         <td> <img src={imgcodeday(1)} width="50"
@@ -204,7 +208,7 @@ res=f"""
   height="50" /> </td>
     </tr>
     <tr> 
-        <td>  température maximale</td>
+        <td>  Température maximale</td>
         <td style =" background-color : {couleur(maxtemp[0])}; font-weight: bold;" > {maxtemp[0]}°C </td>
         <td style =" background-color : {couleur(maxtemp[1])};font-weight: bold;" > {maxtemp[1]}°C </td>
         <td style =" background-color : {couleur(maxtemp[2])};font-weight: bold;border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)" > {maxtemp[2]}°C </td>
@@ -214,7 +218,7 @@ res=f"""
         <td style =" background-color : {couleur(maxtemp[6])};font-weight: bold;" > {maxtemp[6]}°C </td>
     </tr>
     <tr > 
-        <td>  température minimale</td>
+        <td>  Température minimale</td>
         <td style =" background-color : {couleur(mintemp[0])};font-weight: bold;" > {mintemp[0]}°C </td>
         <td style =" background-color : {couleur(mintemp[1])};font-weight: bold;" > {mintemp[1]}°C </td>
         <td style =" background-color : {couleur(mintemp[2])};font-weight: bold;border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)" > {mintemp[2]}°C </td>

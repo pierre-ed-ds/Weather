@@ -5,6 +5,10 @@ project:
 website:
   title: "Météo Montpellier"
   navbar:
+    tools: 
+      - icon: github
+        href: https://github.com/pierre-ed-ds/Weather
+        text: GitHub
     left:
       - href: index.qmd
         text: Prévisions
@@ -12,9 +16,12 @@ website:
 
 format:
   html:
-    theme: minty
+    theme: 
+      light: minty
+      dark: darkly
     css: styles.css
     toc: true
+  
 
 editor: visual
 
