@@ -1,7 +1,6 @@
 project:
   type: website
   output-dir: docs
-
 website:
   title: "Météo Montpellier"
   navbar:
@@ -13,7 +12,6 @@ website:
       - href: index.qmd
         text: Prévisions
       - about.qmd
-
 format:
   html:
     theme: 
@@ -21,14 +19,14 @@ format:
       dark: darkly
     css: styles.css
     toc: true
-
-schedules:
-- cron: '0 0,12 * * *'
-  displayName: Daily midnight build
-  branches:
-    include:
-    - main
-    - release
+on:
+  schedules:
+  - cron: '0 0,12 * * *'
+    displayName: Daily midnight build
+    branches:
+      include:
+      - main
+      - release
 
 editor: visual
 
