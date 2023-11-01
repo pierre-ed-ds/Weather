@@ -1,4 +1,3 @@
-python;
 numpy;
 datetime;
 requests;
@@ -9,3 +8,4 @@ relativedelta;
 Markdown;
 HTML;
 tabulate;
+rmarkdown;
