@@ -1,0 +1,11 @@
+python;
+numpy;
+datetime;
+requests;
+pooch;
+pillow;
+statistics;
+relativedelta;
+Markdown;
+HTML;
+tabulate;
