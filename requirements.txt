@@ -4,7 +4,6 @@ requests;
 pooch;
 pillow;
 statistics;
-relativedelta;
 Markdown;
 HTML;
 tabulate;
