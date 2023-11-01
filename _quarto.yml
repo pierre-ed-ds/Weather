@@ -21,7 +21,14 @@ format:
       dark: darkly
     css: styles.css
     toc: true
-  
+
+schedules:
+- cron: '0 0 * * *'
+  displayName: Daily midnight build
+  branches:
+    include:
+    - main
+    - release
 
 editor: visual
 
