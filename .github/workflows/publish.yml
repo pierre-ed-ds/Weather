@@ -3,7 +3,7 @@ on:
     - cron: "0 5 1 * *" # 5am on the first of every month
   workflow_dispatch:
   push:
-    branches: main
+    branches: [main]
 
 name: Quarto Publish
 
