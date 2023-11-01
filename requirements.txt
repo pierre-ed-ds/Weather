@@ -4,3 +4,4 @@ requests;
 pooch;
 pillow;
 statistics;
+rmarkdown;
