@@ -1,6 +1,4 @@
-numpy
-datetime
-requests
-pooch
-pillow
-statistics
+numpy == 1.26.1
+requests == 2.31.0
+pooch == 1.8.0
+pillow == 10.1.0
