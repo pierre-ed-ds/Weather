@@ -22,11 +22,9 @@ jobs:
       - name: Install Python and Dependencies
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.11"
           cache: "pip"
-      - run: pip install --upgrade pip
       - run: python3 -m pip install jupyter
-      - run: Rscript -e "install.packages('rmarkdown')"
       - run: python3 -m pip install -r requirements.txt
       
 
