@@ -17,7 +17,7 @@ from dateutil.relativedelta import relativedelta
 #initialisation des dates de debut et fin d'extraction de données
 start_date = datetime.datetime.now() - relativedelta(days=3)
 end_date = start_date + relativedelta(days=6)
-
+print(datetime.datetime.now())
 #formatage des dates pour importer le bon URL
 debut=""
 if (start_date.month <10 and start_date.day <10):

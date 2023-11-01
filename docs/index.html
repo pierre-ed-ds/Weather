@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#initialisation des dates de debut et fin d'extraction de données</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime.datetime.now() <span class="op">-</span> relativedelta(days<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>end_date <span class="op">=</span> start_date <span class="op">+</span> relativedelta(days<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(datetime.datetime.now())</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#formatage des dates pour importer le bon URL</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>debut<span class="op">=</span><span class="st">""</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (start_date.month <span class="op">&lt;</span><span class="dv">10</span> <span class="kw">and</span> start_date.day <span class="op">&lt;</span><span class="dv">10</span>):</span>
@@ -441,6 +441,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
 <span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>display(HTML(res))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>2023-11-01 11:56:10.370840</code></pre>
+</div>
 <div class="cell-output cell-output-display column-page">
 
 
@@ -490,9 +493,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="background-color: rgb(216, 186, 12,0.5); font-weight: bold">21.8°C</td>
 <td style="background-color: rgb(216, 186, 12,0.5); font-weight: bold">20.8°C</td>
 <td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold; border-right: 3px solid rgb(85, 215, 195,0.5); border-left: 3px solid rgb(85, 215, 195,0.5)">19.2°C</td>
-<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">18.2°C</td>
-<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">17.6°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.9°C</td>
+<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">19.4°C</td>
+<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">17.4°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.4°C</td>
 <td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.2°C</td>
 </tr>
 <tr class="odd">
@@ -501,19 +504,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.8°C</td>
 <td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold; border-right: 3px solid rgb(85, 215, 195,0.5); border-left: 3px solid rgb(85, 215, 195,0.5)">10.5°C</td>
 <td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.1°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">10.0°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.1°C</td>
 <td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.6°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">8.6°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">8.2°C</td>
 </tr>
 <tr class="even">
 <td>Vitesse de vent maximale</td>
 <td>27.8km/h</td>
 <td>28.6km/h</td>
 <td style="border-right: 3px solid rgb(85, 215, 195,0.5); border-left: 3px solid rgb(85, 215, 195,0.5)">22.3km/h</td>
-<td>15.1km/h</td>
-<td>23.7km/h</td>
-<td>21.7km/h</td>
-<td>22.4km/h</td>
+<td>15.9km/h</td>
+<td>24.3km/h</td>
+<td>27.8km/h</td>
+<td>22.2km/h</td>
 </tr>
 <tr class="odd">
 <td style="border-bottom-left-radius: 20px 20px">Précipitations</td>
@@ -522,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="border-bottom: 3px solid rgb(85, 215, 195,0.5); border-right: 3px solid rgb(85, 215, 195,0.5); border-left: 3px solid rgb(85, 215, 195,0.5)">0.0mm</td>
 <td>0.0mm</td>
 <td>3.4mm</td>
-<td>1.0mm</td>
+<td>0.5mm</td>
 <td style="border-bottom-right-radius: 20px 20px">0.8mm</td>
 </tr>
 </tbody>
