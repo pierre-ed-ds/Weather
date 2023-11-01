@@ -1,7 +1,7 @@
-numpy;
-datetime;
-requests;
-pooch;
-pillow;
-statistics;
-rmarkdown;
+numpy
+datetime
+requests
+pooch
+pillow
+statistics
+rmarkdown
