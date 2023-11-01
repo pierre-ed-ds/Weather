@@ -26,6 +26,7 @@ jobs:
           cache: "pip"
       - run: pip install --upgrade pip
       - run: python3 -m pip install jupyter
+      - run: Rscript -e "install.packages('rmarkdown')"
       - run: python3 -m pip install -r requirements.txt
       
 
