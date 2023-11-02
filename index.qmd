@@ -94,7 +94,7 @@ for i in range(7):
         k+=1
 
 for i in range(7): 
-    maxvent[i]=max(tabvent[i])
+    maxvent[i]=round(statistics.mean(tabvent[i]),1)
 
 #précipitation totale par jours
 tabpluie = np.zeros((7,24))
@@ -158,20 +158,46 @@ def imgcodeday(i):
     '''
     Association de chaques codes WBO à un pictogramme le correspondant. Retourne le chemin d'accès au pictogramme par une chaine de caractères. Version daily.
     '''
-    if (codeimagetot[i]==0):
-        return 'iconsmeteo/Sun-thin.svg'
-    elif (codeimagetot[i]==1 or codeimagetot[i]==2):
-        return 'iconsmeteo/PartlySunny-thin.svg'
-    elif (codeimagetot[i]==3):
-        return 'iconsmeteo/Cloud-thin.svg'
-    elif (45<=codeimagetot[i]<=57):
-        return 'iconsmeteo/Haze-thin.svg'
-    elif (61<=codeimagetot[i]<=67 or 80<=codeimagetot<=82):
-        return 'iconsmeteo/Rain-thin.svg'
-    elif (71<=codeimagetot<=77 or 85<=codeimagetot<=86):
-        return 'iconsmeteo/Snow-thin.svg'
-    elif (95<=codeimagetot<=99):
-        return 'iconsmeteo/Storm-thin.svg'
+    match codeimagetot[i]:
+        case 0:
+            return 'iconsmeteo/wi-day-sunny.svg'
+        case 1:
+            return 'iconsmeteo/wi-day-sunny-overcast.svg'
+        case 2:
+            return 'iconsmeteo/wi-day-cloudy.svg'
+        case 3:
+            return 'iconsmeteo/wi-cloud.svg'
+        case 45|48:
+            return 'iconsmeteo/wi-fog.svg'
+        case 51 | 53 | 55 | 56 | 57:
+            return 'iconsmeteo/wi-sprinkle.svg'
+        case 61 | 81 | 82:
+            return 'iconsmeteo/wi-showers.svg'
+        case 63:
+            return 'iconsmeteo/wi-rain-wind.svg'
+        case 65 | 66 | 67:
+            return 'iconsmeteo/wi-rain.svg'
+        case 71 | 73 | 75 | 85 | 86:
+            return 'iconsmeteo/wi-snow.svg'
+        case 95 | 96:
+            return 'iconsmeteo/wi-storm-showers.svg'
+        case 99:
+            return 'iconsmeteo/wi-thunderstorm.svg'
+print(codeimagetot)
+    #if (codeimagetot[i]==0):
+        
+    #elif (codeimagetot[i]==1 or codeimagetot[i]==2):
+    #    return 'iconsmeteo/PartlySunny-thin.svg'
+    #elif (codeimagetot[i]==3):
+    #    return 'iconsmeteo/Cloud-thin.svg'
+    #elif (45<=codeimagetot[i]<=57):
+    #    return 'iconsmeteo/Haze-thin.svg'
+    #elif (61<=codeimagetot[i]<=67 or 80<=codeimagetot<=82):
+    #    return 'iconsmeteo/Rain-thin.svg'
+    #elif (71<=codeimagetot<=77 or 85<=codeimagetot<=86):
+    #    return 'iconsmeteo/Snow-thin.svg'
+    #elif (95<=codeimagetot<=99):
+    #    return 'iconsmeteo/Storm-thin.svg'
 
 def couleur(temp):
     '''
@@ -254,7 +280,7 @@ res=f"""
         <td style =" background-color : {couleur(mintemp[6])};font-weight: bold;" > {mintemp[6]}°C </td>
     </tr>
     <tr> 
-        <td> Vitesse de vent maximale </td>
+        <td> Vitesse moyenne du vent </td>
         <td> {maxvent[0]}km/h </td>
         <td> {maxvent[1]}km/h </td>
         <td style="border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {maxvent[2]}km/h </td>
