@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/pierre-ed-ds/Weather/about.html</loc>
-    <lastmod>2023-11-02T03:21:14.839Z</lastmod>
+    <loc>https://github.com/pierre-ed-ds/Weather/index.html</loc>
+    <lastmod>2023-11-02T05:22:15.236Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/pierre-ed-ds/Weather/index.html</loc>
-    <lastmod>2023-11-02T03:21:13.815Z</lastmod>
+    <loc>https://github.com/pierre-ed-ds/Weather/about.html</loc>
+    <lastmod>2023-11-02T05:22:05.532Z</lastmod>
   </url>
 </urlset>
