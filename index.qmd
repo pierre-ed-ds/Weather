@@ -234,7 +234,7 @@ res=f"""
         <th  style="border-top-left-radius : 20px 20px"> Jours </th>
         <th>  {inttoday(-2)} <br> <small> {date(-2)} </small></th>
         <th>  Hier <br> <small>{date(-1)}</small></th>
-        <th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)">  Aujourd'hui <br> <small>{date(0)}</small></th>
+        <th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)">   Aujourd'hui <a href = plus.qmd style="text-decoration:none">  > </a><br> <small>{date(0)}</small></th>
         <th>  Demain <br> <small>{date(1)}</small></th>
         <th>  {inttoday(2)} <br> <small>{date(2)}</small></th>
         <th>  {inttoday(3)} <br> <small>{date(3)}</small></th>

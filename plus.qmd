@@ -1,0 +1,324 @@
+---
+title: "Météo détaillée du jour"
+---
+
+```{python}
+#| column: page
+#| code-fold: true
+#| code-summary: "Dérouler le code"
+import numpy as np
+import matplotlib.pyplot as plt
+import requests
+import datetime
+import pooch
+import PIL as Image
+import statistics
+from dateutil.relativedelta import relativedelta
+
+def inttoday(i):
+    '''
+    fonction permettant d'obtenir le nom du jour des jours de la semaines automatiquement, correspond à la première ligne du tableau.
+    '''
+    if ((datetime.datetime.now().weekday() + i)%7 ==0):
+        return 'Lundi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==1):
+        return 'Mardi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==2):
+        return 'Mercredi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==3):
+        return 'Jeudi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==4):
+        return 'Vendredi'
+    elif ((datetime.datetime.now().weekday()+i)%7 ==5):
+        return 'Samedi'
+    else:
+        return 'Dimanche'
+
+def date(i):
+    '''
+    Retourne une chaine de caractères correspondant au jour i, i étant l'offset de jour par rapport au présent.
+    '''
+    date=datetime.datetime.now() + relativedelta(days=i)
+    return f"{date.day}-{date.month}"
+
+#copie de l'URL du site open-meteo avec les differents critères qui nous interessent
+url = f"https://api.open-meteo.com/v1/meteofrance?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&timezone=Europe%2FLondon&forecast_days=1"
+
+#récuperation des données
+response = requests.get(url)
+data = response.json()
+
+#initialisation des tableaux de données que nous allons utiliser
+degres=data['hourly']['temperature_2m']
+ressenti=data['hourly']['apparent_temperature']
+humidite=data['hourly']['relativehumidity_2m']
+pluie=data['hourly']['precipitation']
+neige=data['hourly']['snowfall']
+vent=data['hourly']['windspeed_10m']
+codeimage=data['hourly']['weathercode']
+
+def date(i):
+    '''
+    Retourne une chaine de caractères correspondant au jour i, i étant l'offset de jour par rapport au présent.
+    '''
+    date=datetime.datetime.now() + relativedelta(days=i)
+    return f"{date.day}-{date.month}"
+
+
+def imgcodehour(i):
+    '''
+    Association de chaques codes WBO à un pictogramme le correspondant. Retourne le chemin d'accès au pictogramme par une chaine de caractères. Version day.
+    '''
+    match codeimage[i]:
+        case 0:
+            return 'iconsmeteo/wi-day-sunny.svg'
+        case 1:
+            return 'iconsmeteo/wi-day-sunny-overcast.svg'
+        case 2:
+            return 'iconsmeteo/wi-day-cloudy.svg'
+        case 3:
+            return 'iconsmeteo/wi-cloud.svg'
+        case 45|48:
+            return 'iconsmeteo/wi-fog.svg'
+        case 51 | 53 | 55 | 56 | 57:
+            return 'iconsmeteo/wi-sprinkle.svg'
+        case 61 | 81 | 82:
+            return 'iconsmeteo/wi-showers.svg'
+        case 63:
+            return 'iconsmeteo/wi-rain-wind.svg'
+        case 65 | 66 | 67:
+            return 'iconsmeteo/wi-rain.svg'
+        case 71 | 73 | 75 | 85 | 86:
+            return 'iconsmeteo/wi-snow.svg'
+        case 95 | 96:
+            return 'iconsmeteo/wi-storm-showers.svg'
+        case 99:
+            return 'iconsmeteo/wi-thunderstorm.svg'
+def imgcodehournight(i):
+    '''
+    Association de chaques codes WBO à un pictogramme le correspondant. Retourne le chemin d'accès au pictogramme par une chaine de caractères. Version nuit.
+    '''
+    match codeimage[i]:
+        case 0:
+            return 'iconsmeteo/wi-night-clear.svg'
+        case 1|2:
+            return 'iconsmeteo/wi-night-alt-cloudy.svg'
+        case 3:
+            return 'iconsmeteo/wi-cloud.svg'
+        case 45|48:
+            return 'iconsmeteo/wi-fog.svg'
+        case 51 | 53 | 55 | 56 | 57:
+            return 'iconsmeteo/wi-sprinkle.svg'
+        case 61 | 81 | 82:
+            return 'iconsmeteo/wi-showers.svg'
+        case 63:
+            return 'iconsmeteo/wi-rain-wind.svg'
+        case 65 | 66 | 67:
+            return 'iconsmeteo/wi-rain.svg'
+        case 71 | 73 | 75 | 85 | 86:
+            return 'iconsmeteo/wi-snow.svg'
+        case 95 | 96:
+            return 'iconsmeteo/wi-storm-showers.svg'
+        case 99:
+            return 'iconsmeteo/wi-thunderstorm.svg'
+
+def couleur(temp):
+    '''
+    Associe une couleur en fonction de la température sous le format RGB.
+    '''
+    if (temp<=0):
+        return 'rgb(102, 183, 213,0.5)'
+    if (0<temp<=5):
+        return 'rgb(85, 215, 195,0.5)'
+    if (5<temp<=10):
+        return 'rgb(65, 220, 119,0.5)'
+    if (10<temp<=15):
+        return 'rgb(82, 226, 38,0.5)'
+    if (15<temp<=20):
+        return 'rgb(155, 227, 22,0.5)'
+    if (20<temp<=25):
+        return 'rgb(216, 186, 12,0.5)'
+    if (25<temp<=30):
+        return 'rgb(211, 113, 7,0.5)'
+    if (30<temp<=35):
+        return 'rgb(204, 61, 4,0.5)'
+    if (35<temp):
+        return 'rgb(201, 25, 2,0.5)'
+
+from IPython.display import Markdown
+from IPython.display import HTML
+from tabulate import tabulate
+
+
+#création du tableau en HTML pour pouvoir mettre les images et des couleurs
+res=f"""
+<table class= "table1-style">
+    <thead>
+    <tr>  
+        <th  style="border-top-left-radius : 20px 20px"> {inttoday(0)} {date(0)} <br> <a href = index.qmd style="text-decoration:none">  < </a> Heures </th>
+        <th>  00:00 </th>
+        <th>  01:00 </th>
+        <th>  02:00 </th>
+        <th>  03:00 </th>
+        <th>  04:00 </th>
+        <th>  05:00 </th>
+        <th>  06:00 </th>
+        <th>  07:00 </th>
+        <th>  08:00 </th>
+        <th>  09:00 </th>
+        <th>  10:00 </th>
+        <th>  11:00 </th>
+        <th>  12:00 </th>
+        <th>  13:00 </th>
+        <th>  14:00 </th>
+        <th>  15:00 </th>
+        <th>  16:00 </th>
+        <th>  17:00 </th>
+        <th>  18:00 </th>
+        <th>  19:00 </th>
+        <th>  20:00 </th>
+        <th>  21:00 </th>
+        <th>  22:00 </th>
+        <th  style="border-top-right-radius : 20px 20px" >  23:00</small></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr> 
+        <td>  Pictogramme</td>
+        <td> <img src={imgcodehournight(0)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(1)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(2)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(3)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(4)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(5)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(6)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(7)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(8)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(9)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(10)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(11)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(12)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(13)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(14)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(15)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(16)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(17)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehour(18)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(19)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(20)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(21)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(22)} width="50"
+  height="50" /> </td>
+        <td> <img src={imgcodehournight(23)} width="50"
+  height="50" /> </td>
+    </tr>
+    <tr> 
+        <td>  Température</td>
+        <td style =" background-color : {couleur(degres[0])}; font-weight: bold;" > {degres[0]}°C </td>
+        <td style =" background-color : {couleur(degres[1])};font-weight: bold;" > {degres[1]}°C </td>
+        <td style =" background-color : {couleur(degres[2])};font-weight: bold;" > {degres[2]}°C </td>
+        <td style =" background-color : {couleur(degres[3])};font-weight: bold;" > {degres[3]}°C </td>
+        <td style =" background-color : {couleur(degres[4])};font-weight: bold;" > {degres[4]}°C </td>
+        <td style =" background-color : {couleur(degres[5])};font-weight: bold;" > {degres[5]}°C </td>
+        <td style =" background-color : {couleur(degres[6])};font-weight: bold;" > {degres[6]}°C </td>
+        <td style =" background-color : {couleur(degres[7])};font-weight: bold;" > {degres[7]}°C </td>
+        <td style =" background-color : {couleur(degres[8])};font-weight: bold;" > {degres[8]}°C </td>
+        <td style =" background-color : {couleur(degres[9])};font-weight: bold;" > {degres[9]}°C </td>
+        <td style =" background-color : {couleur(degres[10])};font-weight: bold;" > {degres[10]}°C </td>
+        <td style =" background-color : {couleur(degres[11])};font-weight: bold;" > {degres[11]}°C </td>
+        <td style =" background-color : {couleur(degres[12])};font-weight: bold;" > {degres[12]}°C </td>
+        <td style =" background-color : {couleur(degres[13])};font-weight: bold;" > {degres[13]}°C </td>
+        <td style =" background-color : {couleur(degres[14])};font-weight: bold;" > {degres[14]}°C </td>
+        <td style =" background-color : {couleur(degres[15])};font-weight: bold;" > {degres[15]}°C </td>
+        <td style =" background-color : {couleur(degres[16])};font-weight: bold;" > {degres[16]}°C </td>
+        <td style =" background-color : {couleur(degres[17])};font-weight: bold;" > {degres[17]}°C </td>
+        <td style =" background-color : {couleur(degres[18])};font-weight: bold;" > {degres[18]}°C </td>
+        <td style =" background-color : {couleur(degres[19])};font-weight: bold;" > {degres[19]}°C </td>
+        <td style =" background-color : {couleur(degres[20])};font-weight: bold;" > {degres[20]}°C </td>
+        <td style =" background-color : {couleur(degres[21])};font-weight: bold;" > {degres[21]}°C </td>
+        <td style =" background-color : {couleur(degres[22])};font-weight: bold;" > {degres[22]}°C </td>
+        <td style =" background-color : {couleur(degres[23])};font-weight: bold;" > {degres[23]}°C </td>
+    </tr>
+    <tr> 
+        <td> Vitesse du vent </td>
+        <td> {vent[0]}km/h </td>
+        <td> {vent[1]}km/h </td>
+        <td> {vent[2]}km/h </td>
+        <td> {vent[3]}km/h </td>
+        <td> {vent[4]}km/h </td>
+        <td> {vent[5]}km/h </td>
+        <td> {vent[6]}km/h </td>
+        <td> {vent[7]}km/h </td>
+        <td> {vent[8]}km/h </td>
+        <td> {vent[9]}km/h </td>
+        <td> {vent[10]}km/h </td>
+        <td> {vent[11]}km/h </td>
+        <td> {vent[12]}km/h </td>
+        <td> {vent[13]}km/h </td>
+        <td> {vent[14]}km/h </td>
+        <td> {vent[15]}km/h </td>
+        <td> {vent[16]}km/h </td>
+        <td> {vent[17]}km/h </td>
+        <td> {vent[18]}km/h </td>
+        <td> {vent[19]}km/h </td>
+        <td> {vent[20]}km/h </td>
+        <td> {vent[21]}km/h </td>
+        <td> {vent[22]}km/h </td>
+        <td> {vent[23]}km/h </td>
+    </tr>
+    <tr> 
+        <td style="border-bottom-left-radius : 20px 20px"> Précipitations </td>
+        <td> {pluie[0]}mm </td>
+        <td> {pluie[1]}mm </td>
+        <td> {pluie[2]}mm </td>
+        <td> {pluie[3]}mm </td>
+        <td> {pluie[4]}mm </td>
+        <td> {pluie[5]}mm </td>
+        <td> {pluie[6]}mm </td>
+        <td> {pluie[7]}mm </td>
+        <td> {pluie[8]}mm </td>
+        <td> {pluie[9]}mm </td>
+        <td> {pluie[10]}mm </td>
+        <td> {pluie[11]}mm </td>
+        <td> {pluie[12]}mm </td>
+        <td> {pluie[13]}mm </td>
+        <td> {pluie[14]}mm </td>
+        <td> {pluie[15]}mm </td>
+        <td> {pluie[16]}mm </td>
+        <td> {pluie[17]}mm </td>
+        <td> {pluie[18]}mm </td>
+        <td> {pluie[19]}mm </td>
+        <td> {pluie[20]}mm </td>
+        <td> {pluie[21]}mm </td>
+        <td> {pluie[22]}mm </td>
+        <td style="border-bottom-right-radius : 20px 20px"> {pluie[23]}mm </td>
+    </tr>
+    </tbody>
+
+</table>
+"""
+display(HTML(res))
+```
+

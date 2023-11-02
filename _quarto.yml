@@ -11,7 +11,7 @@ website:
     left:
       - href: index.qmd
         text: Prévisions
-      - about.qmd
+      - plus.qmd
 format:
   html:
     theme: 
@@ -19,14 +19,6 @@ format:
       dark: darkly
     css: styles.css
     toc: true
-on:
-  schedules:
-  - cron: '0,10,20,30,40,50 0,12 * * *'
-    displayName: Daily midnight build
-    branches:
-      include:
-      - main
-      - release
 
 editor: visual
 

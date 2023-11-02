@@ -125,8 +125,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Prévisions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="./plus.html" rel="" target="">
+ <span class="menu-text">Météo détaillée du jour</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th  style="border-top-left-radius : 20px 20px"&gt; Jours &lt;/th&gt;</span></span>
 <span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  </span><span class="sc">{</span>inttoday(<span class="op">-</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss"> &lt;br&gt; &lt;small&gt; </span><span class="sc">{</span>date(<span class="op">-</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss"> &lt;/small&gt;&lt;/th&gt;</span></span>
 <span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  Hier &lt;br&gt; &lt;small&gt;</span><span class="sc">{</span>date(<span class="op">-</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">&lt;/small&gt;&lt;/th&gt;</span></span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"&gt;  Aujourd'hui &lt;br&gt; &lt;small&gt;</span><span class="sc">{</span>date(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">&lt;/small&gt;&lt;/th&gt;</span></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"&gt;   Aujourd'hui &lt;a href = plus.qmd style="text-decoration:none"&gt;  &gt; &lt;/a&gt;&lt;br&gt; &lt;small&gt;</span><span class="sc">{</span>date(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">&lt;/small&gt;&lt;/th&gt;</span></span>
 <span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  Demain &lt;br&gt; &lt;small&gt;</span><span class="sc">{</span>date(<span class="dv">1</span>)<span class="sc">}</span><span class="ss">&lt;/small&gt;&lt;/th&gt;</span></span>
 <span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  </span><span class="sc">{</span>inttoday(<span class="dv">2</span>)<span class="sc">}</span><span class="ss"> &lt;br&gt; &lt;small&gt;</span><span class="sc">{</span>date(<span class="dv">2</span>)<span class="sc">}</span><span class="ss">&lt;/small&gt;&lt;/th&gt;</span></span>
 <span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  </span><span class="sc">{</span>inttoday(<span class="dv">3</span>)<span class="sc">}</span><span class="ss"> &lt;br&gt; &lt;small&gt;</span><span class="sc">{</span>date(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">&lt;/small&gt;&lt;/th&gt;</span></span>
@@ -468,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>display(HTML(res))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-11-02 13:43:39.279014
+<pre><code>2023-11-02 14:06:46.309150
 [63, 3, 3, 61, 51, 53, 51]</code></pre>
 </div>
 <div class="cell-output cell-output-display column-page">
@@ -492,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="small">31-10</span></th>
 <th data-quarto-table-cell-role="th">Hier<br>
 <span class="small">1-11</span></th>
-<th data-quarto-table-cell-role="th" style="border-top: 3px solid rgb(85, 215, 195,0.5); border-right: 3px solid rgb(85, 215, 195,0.5); border-left: 3px solid rgb(85, 215, 195,0.5)">Aujourd'hui<br>
+<th data-quarto-table-cell-role="th" style="border-top: 3px solid rgb(85, 215, 195,0.5); border-right: 3px solid rgb(85, 215, 195,0.5); border-left: 3px solid rgb(85, 215, 195,0.5)">Aujourd'hui <a href="./plus.html" style="text-decoration:none">&gt;</a><br>
 <span class="small">2-11</span></th>
 <th data-quarto-table-cell-role="th">Demain<br>
 <span class="small">3-11</span></th>
