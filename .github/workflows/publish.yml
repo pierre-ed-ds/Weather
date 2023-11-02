@@ -1,9 +1,9 @@
 on:
   schedule:
-    - cron: "0 0 * * *" # 5am on the first of every month
+    - cron: "10 01 * * *" # 5am on the first of every month
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: ["main"]
 
 name: Quarto Publish
 
