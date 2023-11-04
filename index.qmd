@@ -17,7 +17,6 @@ from dateutil.relativedelta import relativedelta
 #initialisation des dates de debut et fin d'extraction de données
 start_date = datetime.datetime.now() - relativedelta(days=3)
 end_date = start_date + relativedelta(days=6)
-print(datetime.datetime.now())
 #formatage des dates pour importer le bon URL
 debut=""
 if (start_date.month <10 and start_date.day <10):
@@ -41,7 +40,7 @@ else:
     fin = f"{end_date.year}-{end_date.month}-{end_date.day}"
 
 #copie de l'URL du site open-meteo avec les differents critères qui nous interessent
-url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6&longitude=3.8833&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&daily=weathercode,uv_index_max&timezone=Europe%2FLondon&start_date={debut}&end_date={fin}"
+url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&daily=weathercode,uv_index_max&timezone=Europe%2FLondon&start_date={debut}&end_date={fin}"
 
 #récuperation des données
 response = requests.get(url)
@@ -84,9 +83,9 @@ for i in range(7):
     medcode[i]=max(tabcode[i])
     #medcode[i]=statistics.median(tabcode[i])
 
-#vent max pour chaques jours
+#vent moyen pour chaques jours
 tabvent = np.zeros((7,24))
-maxvent = np.zeros(7)
+moyvent = np.zeros(7)
 k=0
 for i in range(7):
     for j in range(24):
@@ -94,7 +93,7 @@ for i in range(7):
         k+=1
 
 for i in range(7): 
-    maxvent[i]=round(statistics.mean(tabvent[i]),1)
+    moyvent[i]=round(statistics.mean(tabvent[i]),0)#on ne garde pas de chiffres après la virgule car vue générale
 
 #précipitation totale par jours
 tabpluie = np.zeros((7,24))
@@ -106,11 +105,11 @@ for i in range(7):
         k+=1
 
 for i in range(7): 
-    sumpluie[i]=round(sum(tabpluie[i]),2)
+    sumpluie[i]=round(sum(tabpluie[i]),1)
 
 def inttoday(i):
     '''
-    fonction permettant d'obtenir le nom du jour des jours de la semaines automatiquement, correspond à la première ligne du tableau.
+    fonction permettant d'obtenir le nom du jour des jours de la semaine automatiquement, correspond à la première ligne du tableau.
     '''
     if ((datetime.datetime.now().weekday() + i)%7 ==0):
         return 'Lundi'
@@ -136,7 +135,7 @@ def date(i):
 
 def imgcode(i):
     '''
-    Association de chaques codes WBO à un pictogramme le correspondant. Retourne le chemin d'accès au pictogramme par une chaine de caractères. Version hourly.
+    Association de chaque code WBO à un pictogramme le correspondant. Retourne le chemin d'accès au pictogramme par une chaine de caractères. Version hourly.
     '''
     if (medcode[i]==0):
         return 'iconsmeteo/Sun-thin.svg'
@@ -183,21 +182,6 @@ def imgcodeday(i):
             return 'iconsmeteo/wi-storm-showers.svg'
         case 99:
             return 'iconsmeteo/wi-thunderstorm.svg'
-print(codeimagetot)
-    #if (codeimagetot[i]==0):
-        
-    #elif (codeimagetot[i]==1 or codeimagetot[i]==2):
-    #    return 'iconsmeteo/PartlySunny-thin.svg'
-    #elif (codeimagetot[i]==3):
-    #    return 'iconsmeteo/Cloud-thin.svg'
-    #elif (45<=codeimagetot[i]<=57):
-    #    return 'iconsmeteo/Haze-thin.svg'
-    #elif (61<=codeimagetot[i]<=67 or 80<=codeimagetot<=82):
-    #    return 'iconsmeteo/Rain-thin.svg'
-    #elif (71<=codeimagetot<=77 or 85<=codeimagetot<=86):
-    #    return 'iconsmeteo/Snow-thin.svg'
-    #elif (95<=codeimagetot<=99):
-    #    return 'iconsmeteo/Storm-thin.svg'
 
 def couleur(temp):
     '''
@@ -221,6 +205,17 @@ def couleur(temp):
         return 'rgb(204, 61, 4,0.5)'
     if (35<temp):
         return 'rgb(201, 25, 2,0.5)'
+
+def goutte(i):
+    '''
+    Retourne une image sous format html correspondant a l'intensité des précipitations.
+    '''
+    if 0 < sumpluie[i] <= 2:
+        return '<img src="iconsmeteo/wi-raindrop.svg" width="20" height="20" />' 
+    elif 2 < sumpluie[i]:
+        return '<img src="iconsmeteo/wi-raindrops.svg" width="40" height="40" />' 
+    else :
+        return ''
 
 from IPython.display import Markdown
 from IPython.display import HTML
@@ -281,23 +276,23 @@ res=f"""
     </tr>
     <tr> 
         <td> Vitesse moyenne du vent </td>
-        <td> {maxvent[0]}km/h </td>
-        <td> {maxvent[1]}km/h </td>
-        <td style="border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {maxvent[2]}km/h </td>
-        <td> {maxvent[3]}km/h </td>
-        <td> {maxvent[4]}km/h </td>
-        <td> {maxvent[5]}km/h </td>
-        <td> {maxvent[6]}km/h </td>
+        <td> {int(moyvent[0])}km/h </td>
+        <td> {int(moyvent[1])}km/h </td>
+        <td style="border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {int(moyvent[2])}km/h </td>
+        <td> {int(moyvent[3])} km/h </td>
+        <td> {int(moyvent[4])} km/h </td>
+        <td> {int(moyvent[5])} km/h </td>
+        <td> {int(moyvent[6])} km/h </td>
     </tr>
     <tr> 
         <td style="border-bottom-left-radius : 20px 20px"> Précipitations </td>
-        <td> {sumpluie[0]}mm </td>
-        <td> {sumpluie[1]}mm </td>
-        <td style="border-bottom:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {sumpluie[2]}mm </td>
-        <td> {sumpluie[3]}mm </td>
-        <td> {sumpluie[4]}mm </td>
-        <td> {sumpluie[5]}mm </td>
-        <td style="border-bottom-right-radius : 20px 20px"> {sumpluie[6]}mm </td>
+        <td> {goutte(0)} {sumpluie[0]}mm </td>
+        <td> {goutte(1)} {sumpluie[1]}mm </td>
+        <td style="border-bottom:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {goutte(2)} {sumpluie[2]}mm </td>
+        <td> {goutte(3)} {sumpluie[3]}mm </td>
+        <td> {goutte(4)} {sumpluie[4]}mm </td>
+        <td> {goutte(5)} {sumpluie[5]}mm </td>
+        <td style="border-bottom-right-radius : 20px 20px"> {goutte(6)} {sumpluie[6]}mm </td>
     </tr>
     </tbody>
 

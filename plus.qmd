@@ -42,7 +42,7 @@ def date(i):
     return f"{date.day}-{date.month}"
 
 #copie de l'URL du site open-meteo avec les differents critères qui nous interessent
-url = f"https://api.open-meteo.com/v1/meteofrance?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&timezone=Europe%2FLondon&forecast_days=1"
+url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&timezone=Europe%2FLondon&forecast_days=1"
 
 #récuperation des données
 response = requests.get(url)
@@ -145,6 +145,17 @@ def couleur(temp):
     if (35<temp):
         return 'rgb(201, 25, 2,0.5)'
 
+def goutte(i):
+    '''
+    Retourne une image sous format html correspondant a l'intensité des précipitations.
+    '''
+    if 0 < pluie[i] < 0.5:
+        return '<img src="iconsmeteo/wi-raindrop.svg" width="15" height="15" /> <br>' 
+    elif 0.5 <= pluie[i]:
+        return '<img src="iconsmeteo/wi-raindrops.svg" width="25" height="25" /> <br>' 
+    else :
+        return ' - <br>'
+
 from IPython.display import Markdown
 from IPython.display import HTML
 from tabulate import tabulate
@@ -235,7 +246,7 @@ res=f"""
   height="50" /> </td>
     </tr>
     <tr> 
-        <td>  Température</td>
+        <td HEIGHT="50">  Température</td>
         <td style =" background-color : {couleur(degres[0])}; font-weight: bold;" > {degres[0]}°C </td>
         <td style =" background-color : {couleur(degres[1])};font-weight: bold;" > {degres[1]}°C </td>
         <td style =" background-color : {couleur(degres[2])};font-weight: bold;" > {degres[2]}°C </td>
@@ -290,30 +301,30 @@ res=f"""
     </tr>
     <tr> 
         <td style="border-bottom-left-radius : 20px 20px"> Précipitations </td>
-        <td> {pluie[0]}mm </td>
-        <td> {pluie[1]}mm </td>
-        <td> {pluie[2]}mm </td>
-        <td> {pluie[3]}mm </td>
-        <td> {pluie[4]}mm </td>
-        <td> {pluie[5]}mm </td>
-        <td> {pluie[6]}mm </td>
-        <td> {pluie[7]}mm </td>
-        <td> {pluie[8]}mm </td>
-        <td> {pluie[9]}mm </td>
-        <td> {pluie[10]}mm </td>
-        <td> {pluie[11]}mm </td>
-        <td> {pluie[12]}mm </td>
-        <td> {pluie[13]}mm </td>
-        <td> {pluie[14]}mm </td>
-        <td> {pluie[15]}mm </td>
-        <td> {pluie[16]}mm </td>
-        <td> {pluie[17]}mm </td>
-        <td> {pluie[18]}mm </td>
-        <td> {pluie[19]}mm </td>
-        <td> {pluie[20]}mm </td>
-        <td> {pluie[21]}mm </td>
-        <td> {pluie[22]}mm </td>
-        <td style="border-bottom-right-radius : 20px 20px"> {pluie[23]}mm </td>
+        <td> {goutte(0)} {pluie[0]}mm </td>
+        <td> {goutte(1)} {pluie[1]}mm </td>
+        <td> {goutte(2)} {pluie[2]}mm </td>
+        <td> {goutte(3)} {pluie[3]}mm </td>
+        <td> {goutte(4)} {pluie[4]}mm </td>
+        <td> {goutte(5)} {pluie[5]}mm </td>
+        <td> {goutte(6)} {pluie[6]}mm </td>
+        <td> {goutte(7)} {pluie[7]}mm </td>
+        <td> {goutte(8)} {pluie[8]}mm </td>
+        <td> {goutte(9)} {pluie[9]}mm </td>
+        <td> {goutte(10)} {pluie[10]}mm </td>
+        <td> {goutte(11)} {pluie[11]}mm </td>
+        <td> {goutte(12)} {pluie[12]}mm </td>
+        <td> {goutte(13)} {pluie[13]}mm </td>
+        <td> {goutte(14)} {pluie[14]}mm </td>
+        <td> {goutte(15)} {pluie[15]}mm </td>
+        <td> {goutte(16)} {pluie[16]}mm </td>
+        <td> {goutte(17)} {pluie[17]}mm </td>
+        <td> {goutte(18)} {pluie[18]}mm </td>
+        <td> {goutte(19)} {pluie[19]}mm </td>
+        <td> {goutte(20)} {pluie[20]}mm </td>
+        <td> {goutte(21)} {pluie[21]}mm </td>
+        <td> {goutte(22)} {pluie[22]}mm </td>
+        <td style="border-bottom-right-radius : 20px 20px"> {goutte(23)} {pluie[23]}mm </td>
     </tr>
     </tbody>
 
