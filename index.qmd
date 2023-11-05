@@ -15,7 +15,7 @@ import statistics
 from dateutil.relativedelta import relativedelta
 
 #initialisation des dates de debut et fin d'extraction de données
-start_date = datetime.datetime.now() - relativedelta(days=3)
+start_date = datetime.datetime.now() - relativedelta(days=2)
 end_date = start_date + relativedelta(days=6)
 #formatage des dates pour importer le bon URL
 debut=""
@@ -56,7 +56,6 @@ vent=data['hourly']['windspeed_10m']
 codeimage=data['hourly']['weathercode']
 codeimagetot=data['daily']['weathercode']
 
-
 #temperatures min et max pour chaques jours (il y avait la possibilité de les obtenir "daily" mais j'ai fait ainsi)
 tabdegres = np.zeros((7,24))
 
@@ -89,7 +88,10 @@ moyvent = np.zeros(7)
 k=0
 for i in range(7):
     for j in range(24):
-        tabvent[i,j]= vent[k]
+        if vent[k] == None:
+            tabvent[i,j]= 0
+        else :
+            tabvent[i,j]= vent[k]
         k+=1
 
 for i in range(7): 
@@ -101,7 +103,10 @@ sumpluie = np.zeros(7)
 k=0
 for i in range(7):
     for j in range(24):
-        tabpluie[i,j]= pluie[k]
+        if pluie[k]==None:
+            tabpluie[i,j]=0
+        else:
+            tabpluie[i,j]= pluie[k]
         k+=1
 
 for i in range(7): 
@@ -220,7 +225,6 @@ def goutte(i):
 from IPython.display import Markdown
 from IPython.display import HTML
 from tabulate import tabulate
-
 #création du tableau en HTML pour pouvoir mettre les images et des couleurs
 res=f"""
 <table class= "table1-style">
@@ -282,7 +286,7 @@ res=f"""
         <td> {int(moyvent[3])} km/h </td>
         <td> {int(moyvent[4])} km/h </td>
         <td> {int(moyvent[5])} km/h </td>
-        <td> {int(moyvent[6])} km/h </td>
+        <td> {(moyvent[6])} km/h </td>
     </tr>
     <tr> 
         <td style="border-bottom-left-radius : 20px 20px"> Précipitations </td>
