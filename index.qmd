@@ -187,6 +187,8 @@ def imgcodeday(i):
             return 'iconsmeteo/wi-storm-showers.svg'
         case 99:
             return 'iconsmeteo/wi-thunderstorm.svg'
+        case _: #si on a pas encore d'informations j'ai juste mis un cercle
+            return 'iconsmeteo/wi-moon-new.svg'
 
 def couleur(temp):
     '''
@@ -210,6 +212,8 @@ def couleur(temp):
         return 'rgb(204, 61, 4,0.5)'
     if (35<temp):
         return 'rgb(201, 25, 2,0.5)'
+    else:
+        return 'rgb(188, 212,204,0.5)'
 
 def goutte(i):
     '''

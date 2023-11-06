@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "00 01,13 * * *" # actualisation à 1h du matin et à 13h
+    - cron: "00 01,8,13,21 * * *" # actualisation à 1:00, 8:00, 13:00 et 21:00
   workflow_dispatch:
   push:
     branches: ["main"]
