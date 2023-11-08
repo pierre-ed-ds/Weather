@@ -42,7 +42,7 @@ def date(i):
     return f"{date.day}-{date.month}"
 
 #copie de l'URL du site open-meteo avec les differents critères qui nous interessent
-url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,snowfall,weathercode,cloudcover,windspeed_10m,windspeed_20m,temperature_20m&daily=sunrise,sunset&timezone=Europe%2FLondon&forecast_days=1"
+url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode,cloudcover,windspeed_10m&daily=sunrise,sunset&timezone=Europe%2FLondon&forecast_days=1"
 
 #récuperation des données
 response = requests.get(url)
@@ -51,13 +51,14 @@ data = response.json()
 degres=data['hourly']['temperature_2m']
 ressenti=data['hourly']['apparent_temperature']
 humidite=data['hourly']['relativehumidity_2m']
+cloudcover = data['hourly']['cloudcover']
 pluie=data['hourly']['precipitation']
-neige=data['hourly']['snowfall']
 vent=data['hourly']['windspeed_10m']
 codeimage=data['hourly']['weathercode']
+
+
 day=int(datetime.datetime.strptime(data['daily']['sunrise'][0],'%Y-%m-%dT%H:%M').strftime('%H'))
 night=int(datetime.datetime.strptime(data['daily']['sunset'][0],'%Y-%m-%dT%H:%M').strftime('%H'))
-
 def date(i):
     '''
     Retourne une chaine de caractères correspondant au jour i, i étant l'offset de jour par rapport au présent.
@@ -146,6 +147,18 @@ def couleur(temp):
     if (35<temp):
         return 'rgb(201, 25, 2,0.5)'
 
+def cover(i):
+    '''
+    Retourne un gris plus ou moins opaque selon la couverture nuageuse
+    '''
+    return f"rgb(169, 169, 169,{i/100})"
+
+def humid(i):
+    '''
+    Retourne un bleu plus ou moins opaque selon l'humidité'
+    '''
+    return f"rgb(127,177,236,{i/100})"
+
 def goutte(i):
     '''
     Retourne une image sous format html correspondant a l'intensité des précipitations.
@@ -202,7 +215,7 @@ res=f"""
     </thead>
     <tbody>
     <tr> 
-        <td>  Pictogramme</td>
+        <td>  Pictogramme </td>
         <td> <img src={imagecodetot(0)} width="50"
   height="50" /> </td>
         <td> <img src={imagecodetot(1)} width="50"
@@ -279,6 +292,33 @@ res=f"""
         <td style =" background-color : {couleur(degres[22])};font-weight: bold;" > {degres[22]}°C </td>
         <td style =" background-color : {couleur(degres[23])};font-weight: bold;" > {degres[23]}°C </td>
     </tr>
+    <tr>
+        <td HEIGHT="25">  Ressenti</td>
+        <td style =" background-color : {couleur(ressenti[0])}; font-weight: bold;" > {ressenti[0]}°C </td>
+        <td style =" background-color : {couleur(ressenti[1])};font-weight: bold;" > {ressenti[1]}°C </td>
+        <td style =" background-color : {couleur(ressenti[2])};font-weight: bold;" > {ressenti[2]}°C </td>
+        <td style =" background-color : {couleur(ressenti[3])};font-weight: bold;" > {ressenti[3]}°C </td>
+        <td style =" background-color : {couleur(ressenti[4])};font-weight: bold;" > {ressenti[4]}°C </td>
+        <td style =" background-color : {couleur(ressenti[5])};font-weight: bold;" > {ressenti[5]}°C </td>
+        <td style =" background-color : {couleur(ressenti[6])};font-weight: bold;" > {ressenti[6]}°C </td>
+        <td style =" background-color : {couleur(ressenti[7])};font-weight: bold;" > {ressenti[7]}°C </td>
+        <td style =" background-color : {couleur(ressenti[8])};font-weight: bold;" > {ressenti[8]}°C </td>
+        <td style =" background-color : {couleur(ressenti[9])};font-weight: bold;" > {ressenti[9]}°C </td>
+        <td style =" background-color : {couleur(ressenti[10])};font-weight: bold;" > {ressenti[10]}°C </td>
+        <td style =" background-color : {couleur(ressenti[11])};font-weight: bold;" > {ressenti[11]}°C </td>
+        <td style =" background-color : {couleur(ressenti[12])};font-weight: bold;" > {ressenti[12]}°C </td>
+        <td style =" background-color : {couleur(ressenti[13])};font-weight: bold;" > {ressenti[13]}°C </td>
+        <td style =" background-color : {couleur(ressenti[14])};font-weight: bold;" > {ressenti[14]}°C </td>
+        <td style =" background-color : {couleur(ressenti[15])};font-weight: bold;" > {ressenti[15]}°C </td>
+        <td style =" background-color : {couleur(ressenti[16])};font-weight: bold;" > {ressenti[16]}°C </td>
+        <td style =" background-color : {couleur(ressenti[17])};font-weight: bold;" > {ressenti[17]}°C </td>
+        <td style =" background-color : {couleur(ressenti[18])};font-weight: bold;" > {ressenti[18]}°C </td>
+        <td style =" background-color : {couleur(ressenti[19])};font-weight: bold;" > {ressenti[19]}°C </td>
+        <td style =" background-color : {couleur(ressenti[20])};font-weight: bold;" > {ressenti[20]}°C </td>
+        <td style =" background-color : {couleur(ressenti[21])};font-weight: bold;" > {ressenti[21]}°C </td>
+        <td style =" background-color : {couleur(ressenti[22])};font-weight: bold;" > {ressenti[22]}°C </td>
+        <td style =" background-color : {couleur(ressenti[23])};font-weight: bold;" > {ressenti[23]}°C </td>
+    </tr>
     <tr> 
         <td> Vitesse du vent </td>
         <td> {vent[0]}km/h </td>
@@ -307,7 +347,7 @@ res=f"""
         <td> {vent[23]}km/h </td>
     </tr>
     <tr> 
-        <td style="border-bottom-left-radius : 20px 20px"> Précipitations </td>
+        <td> Précipitations </td>
         <td> {goutte(0)} {pluie[0]}mm </td>
         <td> {goutte(1)} {pluie[1]}mm </td>
         <td> {goutte(2)} {pluie[2]}mm </td>
@@ -331,7 +371,61 @@ res=f"""
         <td> {goutte(20)} {pluie[20]}mm </td>
         <td> {goutte(21)} {pluie[21]}mm </td>
         <td> {goutte(22)} {pluie[22]}mm </td>
-        <td style="border-bottom-right-radius : 20px 20px"> {goutte(23)} {pluie[23]}mm </td>
+        <td> {goutte(23)} {pluie[23]}mm </td>
+    </tr>
+    <tr style="background-color : white"> 
+        <td> Humidité </td>
+        <td style =" background-color : {humid(humidite[0])}; font-weight: bold;" > {humidite[0]}% </td>
+        <td style =" background-color : {humid(humidite[1])};font-weight: bold;" > {humidite[1]}% </td>
+        <td style =" background-color : {humid(humidite[2])};font-weight: bold;" > {humidite[2]}% </td>
+        <td style =" background-color : {humid(humidite[3])};font-weight: bold;" > {humidite[3]}% </td>
+        <td style =" background-color : {humid(humidite[4])};font-weight: bold;" > {humidite[4]}% </td>
+        <td style =" background-color : {humid(humidite[5])};font-weight: bold;" > {humidite[5]}% </td>
+        <td style =" background-color : {humid(humidite[6])};font-weight: bold;" > {humidite[6]}% </td>
+        <td style =" background-color : {humid(humidite[7])};font-weight: bold;" > {humidite[7]}% </td>
+        <td style =" background-color : {humid(humidite[8])};font-weight: bold;" > {humidite[8]}% </td>
+        <td style =" background-color : {humid(humidite[9])};font-weight: bold;" > {humidite[9]}% </td>
+        <td style =" background-color : {humid(humidite[10])};font-weight: bold;" > {humidite[10]}% </td>
+        <td style =" background-color : {humid(humidite[11])};font-weight: bold;" > {humidite[11]}% </td>
+        <td style =" background-color : {humid(humidite[12])};font-weight: bold;" > {humidite[12]}% </td>
+        <td style =" background-color : {humid(humidite[13])};font-weight: bold;" > {humidite[13]}% </td>
+        <td style =" background-color : {humid(humidite[14])};font-weight: bold;" > {humidite[14]}% </td>
+        <td style =" background-color : {humid(humidite[15])};font-weight: bold;" > {humidite[15]}% </td>
+        <td style =" background-color : {humid(humidite[16])};font-weight: bold;" > {humidite[16]}% </td>
+        <td style =" background-color : {humid(humidite[17])};font-weight: bold;" > {humidite[17]}% </td>
+        <td style =" background-color : {humid(humidite[18])};font-weight: bold;" > {humidite[18]}% </td>
+        <td style =" background-color : {humid(humidite[19])};font-weight: bold;" > {humidite[19]}% </td>
+        <td style =" background-color : {humid(humidite[20])};font-weight: bold;" > {humidite[20]}% </td>
+        <td style =" background-color : {humid(humidite[21])};font-weight: bold;" > {humidite[21]}% </td>
+        <td style =" background-color : {humid(humidite[22])};font-weight: bold;" > {humidite[22]}% </td>
+        <td style =" background-color : {humid(humidite[23])};font-weight: bold;" > {humidite[23]}% </td>
+    </tr>
+    <tr style="background-color : white">
+        <td  style="border-bottom-left-radius : 20px 20px" HEIGHT="50">  Couverture nuageuse</td>
+        <td style =" background-color : {cover(cloudcover[0])}; font-weight: bold;" > {cloudcover[0]}% </td>
+        <td style =" background-color : {cover(cloudcover[1])};font-weight: bold;" > {cloudcover[1]}% </td>
+        <td style =" background-color : {cover(cloudcover[2])};font-weight: bold;" > {cloudcover[2]}% </td>
+        <td style =" background-color : {cover(cloudcover[3])};font-weight: bold;" > {cloudcover[3]}% </td>
+        <td style =" background-color : {cover(cloudcover[4])};font-weight: bold;" > {cloudcover[4]}% </td>
+        <td style =" background-color : {cover(cloudcover[5])};font-weight: bold;" > {cloudcover[5]}% </td>
+        <td style =" background-color : {cover(cloudcover[6])};font-weight: bold;" > {cloudcover[6]}% </td>
+        <td style =" background-color : {cover(cloudcover[7])};font-weight: bold;" > {cloudcover[7]}% </td>
+        <td style =" background-color : {cover(cloudcover[8])};font-weight: bold;" > {cloudcover[8]}% </td>
+        <td style =" background-color : {cover(cloudcover[9])};font-weight: bold;" > {cloudcover[9]}% </td>
+        <td style =" background-color : {cover(cloudcover[10])};font-weight: bold;" > {cloudcover[10]}% </td>
+        <td style =" background-color : {cover(cloudcover[11])};font-weight: bold;" > {cloudcover[11]}% </td>
+        <td style =" background-color : {cover(cloudcover[12])};font-weight: bold;" > {cloudcover[12]}% </td>
+        <td style =" background-color : {cover(cloudcover[13])};font-weight: bold;" > {cloudcover[13]}% </td>
+        <td style =" background-color : {cover(cloudcover[14])};font-weight: bold;" > {cloudcover[14]}% </td>
+        <td style =" background-color : {cover(cloudcover[15])};font-weight: bold;" > {cloudcover[15]}% </td>
+        <td style =" background-color : {cover(cloudcover[16])};font-weight: bold;" > {cloudcover[16]}% </td>
+        <td style =" background-color : {cover(cloudcover[17])};font-weight: bold;" > {cloudcover[17]}% </td>
+        <td style =" background-color : {cover(cloudcover[18])};font-weight: bold;" > {cloudcover[18]}% </td>
+        <td style =" background-color : {cover(cloudcover[19])};font-weight: bold;" > {cloudcover[19]}% </td>
+        <td style =" background-color : {cover(cloudcover[20])};font-weight: bold;" > {cloudcover[20]}% </td>
+        <td style =" background-color : {cover(cloudcover[21])};font-weight: bold;" > {cloudcover[21]}% </td>
+        <td style =" background-color : {cover(cloudcover[22])};font-weight: bold;" > {cloudcover[22]}% </td>
+        <td style =" background-color : {cover(cloudcover[23])};font-weight: bold;border-bottom-right-radius : 20px 20px" > {cloudcover[23]}% </td>
     </tr>
     </tbody>
 
