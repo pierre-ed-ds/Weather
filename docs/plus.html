@@ -279,86 +279,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    <span class="cf">match</span> codeimage[i]:</span>
 <span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">0</span>:</span>
 <span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-night-clear.svg"</span></span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">1</span> <span class="op">|</span> <span class="dv">2</span>:</span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-night-alt-cloudy.svg"</span></span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">3</span>:</span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-cloud.svg"</span></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">45</span> <span class="op">|</span> <span class="dv">48</span>:</span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-fog.svg"</span></span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">51</span> <span class="op">|</span> <span class="dv">53</span> <span class="op">|</span> <span class="dv">55</span> <span class="op">|</span> <span class="dv">56</span> <span class="op">|</span> <span class="dv">57</span>:</span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-sprinkle.svg"</span></span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">61</span> <span class="op">|</span> <span class="dv">81</span> <span class="op">|</span> <span class="dv">82</span>:</span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-showers.svg"</span></span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">63</span>:</span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-rain-wind.svg"</span></span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">65</span> <span class="op">|</span> <span class="dv">66</span> <span class="op">|</span> <span class="dv">67</span>:</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-rain.svg"</span></span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">71</span> <span class="op">|</span> <span class="dv">73</span> <span class="op">|</span> <span class="dv">75</span> <span class="op">|</span> <span class="dv">85</span> <span class="op">|</span> <span class="dv">86</span>:</span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-snow.svg"</span></span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">95</span> <span class="op">|</span> <span class="dv">96</span>:</span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-storm-showers.svg"</span></span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">99</span>:</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-thunderstorm.svg"</span></span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> couleur(temp):</span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="co">    Associe une couleur en fonction de la température sous le format RGB.</span></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> temp <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(102, 183, 213,0.5)"</span></span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(85, 215, 195,0.5)"</span></span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">5</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(65, 220, 119,0.5)"</span></span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">10</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">15</span>:</span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(82, 226, 38,0.5)"</span></span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">15</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">20</span>:</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(155, 227, 22,0.5)"</span></span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">20</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">25</span>:</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(216, 186, 12,0.5)"</span></span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">25</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">30</span>:</span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(211, 113, 7,0.5)"</span></span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">30</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">35</span>:</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(204, 61, 4,0.5)"</span></span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">35</span> <span class="op">&lt;</span> temp:</span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(201, 25, 2,0.5)"</span></span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cover(i):</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="co">    Retourne un gris plus ou moins opaque selon la couverture nuageuse</span></span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"rgb(169, 169, 169,</span><span class="sc">{</span>i<span class="op">/</span><span class="dv">100</span><span class="sc">}</span><span class="ss">)"</span></span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> humid(i):</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="co">    Retourne un bleu plus ou moins opaque selon l'humidité'</span></span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"rgb(127,177,236,</span><span class="sc">{</span>i<span class="op">/</span><span class="dv">100</span><span class="sc">}</span><span class="ss">)"</span></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> goutte(i):</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="co">    Retourne une image sous format html correspondant a l'intensité des précipitations.</span></span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> pluie[i] <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'&lt;img src="iconsmeteo/wi-raindrop.svg" width="15" height="15" /&gt; &lt;br&gt;'</span></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="fl">0.5</span> <span class="op">&lt;=</span> pluie[i]:</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'&lt;img src="iconsmeteo/wi-raindrops.svg" width="25" height="25" /&gt; &lt;br&gt;'</span></span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">" - &lt;br&gt;"</span></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> imagecodetot(i):</span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> day <span class="op">&lt;</span> i <span class="op">&lt;=</span> night:</span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> imgcodehour(i)</span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> imgcodehournight(i)</span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">1</span>:</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-night-alt-partly-cloudy.svg"</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">2</span>:</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-night-alt-cloudy.svg"</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">3</span>:</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-cloud.svg"</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">45</span> <span class="op">|</span> <span class="dv">48</span>:</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-fog.svg"</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">51</span> <span class="op">|</span> <span class="dv">53</span> <span class="op">|</span> <span class="dv">55</span> <span class="op">|</span> <span class="dv">56</span> <span class="op">|</span> <span class="dv">57</span>:</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-sprinkle.svg"</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">61</span> <span class="op">|</span> <span class="dv">81</span> <span class="op">|</span> <span class="dv">82</span>:</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-showers.svg"</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">63</span>:</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-rain-wind.svg"</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">65</span> <span class="op">|</span> <span class="dv">66</span> <span class="op">|</span> <span class="dv">67</span>:</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-rain.svg"</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">71</span> <span class="op">|</span> <span class="dv">73</span> <span class="op">|</span> <span class="dv">75</span> <span class="op">|</span> <span class="dv">85</span> <span class="op">|</span> <span class="dv">86</span>:</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-snow.svg"</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">95</span> <span class="op">|</span> <span class="dv">96</span>:</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-storm-showers.svg"</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">99</span>:</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"iconsmeteo/wi-thunderstorm.svg"</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> couleur(temp):</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a><span class="co">    Associe une couleur en fonction de la température sous le format RGB.</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> temp <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(102, 183, 213,0.5)"</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(85, 215, 195,0.5)"</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">5</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(65, 220, 119,0.5)"</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">10</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">15</span>:</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(82, 226, 38,0.5)"</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">15</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">20</span>:</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(155, 227, 22,0.5)"</span></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">20</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">25</span>:</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(216, 186, 12,0.5)"</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">25</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">30</span>:</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(211, 113, 7,0.5)"</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">30</span> <span class="op">&lt;</span> temp <span class="op">&lt;=</span> <span class="dv">35</span>:</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(204, 61, 4,0.5)"</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">35</span> <span class="op">&lt;</span> temp:</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"rgb(201, 25, 2,0.5)"</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cover(i):</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="co">    Retourne un gris plus ou moins opaque selon la couverture nuageuse</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"rgb(169, 169, 169,</span><span class="sc">{</span>i<span class="op">/</span><span class="dv">100</span><span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> humid(i):</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="co">    Retourne un bleu plus ou moins opaque selon l'humidité'</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"rgb(127,177,236,</span><span class="sc">{</span>i<span class="op">/</span><span class="dv">100</span><span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> goutte(i):</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a><span class="co">    Retourne une image sous format html correspondant a l'intensité des précipitations.</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> pluie[i] <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'&lt;img src="iconsmeteo/wi-raindrop.svg" width="15" height="15" /&gt; &lt;br&gt;'</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="fl">0.5</span> <span class="op">&lt;=</span> pluie[i]:</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'&lt;img src="iconsmeteo/wi-raindrops.svg" width="25" height="25" /&gt; &lt;br&gt;'</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">" - &lt;br&gt;"</span></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> imagecodetot(i):</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> day <span class="op">&lt;</span> i <span class="op">&lt;=</span> night:</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> imgcodehour(i)</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> imgcodehournight(i)</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span>
 <span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabulate <span class="im">import</span> tabulate</span>
 <span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="ss">&lt;table class= "table1-style"&gt;</span></span>
 <span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;thead&gt;</span></span>
 <span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;tr&gt;  </span></span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th  style="border-top-left-radius : 20px 20px"&gt; </span><span class="sc">{</span>inttoday(<span class="dv">0</span>)<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>date(<span class="dv">0</span>)<span class="sc">}</span><span class="ss"> &lt;br&gt; &lt;a href = index.qmd style="text-decoration:none"&gt;  &lt; &lt;/a&gt; Heures &lt;/th&gt;</span></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th  style="border-top-left-radius : 20px 20px"&gt;    &lt;a class=lien href = index.qmd style="text-decoration:none"&gt; </span><span class="sc">{</span>inttoday(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">  &lt;br&gt; </span><span class="sc">{</span>date(<span class="dv">0</span>)<span class="sc">}</span><span class="ss"> &lt;/a&gt;&lt;/th&gt;</span></span>
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  00:00 &lt;/th&gt;</span></span>
 <span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  01:00 &lt;/th&gt;</span></span>
 <span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;th&gt;  02:00 &lt;/th&gt;</span></span>
@@ -613,9 +613,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-444"><a href="#cb1-444" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-445"><a href="#cb1-445" aria-hidden="true" tabindex="-1"></a><span class="ss">&lt;/table&gt;</span></span>
 <span id="cb1-446"><a href="#cb1-446" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb1-447"><a href="#cb1-447" aria-hidden="true" tabindex="-1"></a>display(HTML(res))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-447"><a href="#cb1-447" aria-hidden="true" tabindex="-1"></a>HTML(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display column-page">
+<div class="cell-output cell-output-display column-page" data-execution_count="1">
 
 
 <table class="table1-style table table-sm table-striped small" data-quarto-postprocess="true">
@@ -648,8 +648,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </colgroup>
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th" style="border-top-left-radius: 20px 20px">Mercredi 8-11<br>
-<a href="./index.html" style="text-decoration:none">&lt;</a> Heures</th>
+<th data-quarto-table-cell-role="th" style="border-top-left-radius: 20px 20px"><a href="./index.html" class="lien" style="text-decoration:none">Jeudi<br>
+9-11</a></th>
 <th data-quarto-table-cell-role="th">00:00</th>
 <th data-quarto-table-cell-role="th">01:00</th>
 <th data-quarto-table-cell-role="th">02:00</th>
@@ -679,111 +679,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>Pictogramme</td>
-<td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-day-sunny-overcast.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-day-sunny.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-night-alt-cloudy.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
-<td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
+<td><img src="iconsmeteo/wi-night-clear.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
 <td><img src="iconsmeteo/wi-cloud.svg" width="50" height="50"></td>
 </tr>
 <tr class="even">
 <td height="50">Température</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">8.8°C</td>
 <td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.3°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.1°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">8.4°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">6.7°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">6.4°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">5.6°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">6.1°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.2°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.2°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.8°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.5°C</td>
-<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">16.3°C</td>
-<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">16.6°C</td>
-<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">16.7°C</td>
-<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">16.0°C</td>
-<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">15.1°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.1°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.1°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.3°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.4°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">10.0°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.3°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.4°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.3°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.3°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.2°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.7°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.3°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.8°C</td>
+<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">15.3°C</td>
+<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">16.8°C</td>
+<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">17.0°C</td>
+<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">16.5°C</td>
+<td style="background-color: rgb(155, 227, 22,0.5); font-weight: bold">15.6°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.5°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.6°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.2°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.7°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.9°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.2°C</td>
 </tr>
 <tr class="odd">
 <td height="25">Ressenti</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">6.0°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">5.8°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">6.2°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">6.1°C</td>
-<td style="background-color: rgb(85, 215, 195,0.5); font-weight: bold">4.7°C</td>
-<td style="background-color: rgb(85, 215, 195,0.5); font-weight: bold">4.3°C</td>
-<td style="background-color: rgb(85, 215, 195,0.5); font-weight: bold">2.9°C</td>
-<td style="background-color: rgb(85, 215, 195,0.5); font-weight: bold">3.9°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">5.3°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.4°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.5°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.4°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.5°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.7°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.8°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.2°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.0°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.3°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.7°C</td>
-<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.2°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">6.6°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.9°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.8°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.7°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.5°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.6°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.3°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.3°C</td>
 <td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.0°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">8.1°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.4°C</td>
-<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">7.3°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.9°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.6°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.4°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">14.6°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.3°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.4°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">13.2°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.7°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">12.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">11.1°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.9°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.7°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.7°C</td>
+<td style="background-color: rgb(82, 226, 38,0.5); font-weight: bold">10.3°C</td>
+<td style="background-color: rgb(65, 220, 119,0.5); font-weight: bold">9.5°C</td>
 </tr>
 <tr class="even">
 <td>Vitesse du vent</td>
-<td>8.7km/h</td>
-<td>12.2km/h</td>
-<td>7.8km/h</td>
-<td>4.2km/h</td>
-<td>2.3km/h</td>
-<td>3.4km/h</td>
-<td>6.3km/h</td>
-<td>3.5km/h</td>
-<td>1.8km/h</td>
-<td>1.8km/h</td>
-<td>5.4km/h</td>
-<td>6.2km/h</td>
-<td>4.2km/h</td>
-<td>5.6km/h</td>
-<td>6.4km/h</td>
 <td>13.8km/h</td>
-<td>15.1km/h</td>
-<td>8.7km/h</td>
-<td>4.8km/h</td>
-<td>2.6km/h</td>
-<td>4.4km/h</td>
-<td>7.0km/h</td>
-<td>7.1km/h</td>
-<td>8.9km/h</td>
+<td>11.2km/h</td>
+<td>11.5km/h</td>
+<td>14.0km/h</td>
+<td>12.9km/h</td>
+<td>13.7km/h</td>
+<td>3.1km/h</td>
+<td>12.2km/h</td>
+<td>13.1km/h</td>
+<td>11.2km/h</td>
+<td>10.5km/h</td>
+<td>8.1km/h</td>
+<td>5.5km/h</td>
+<td>19.0km/h</td>
+<td>18.8km/h</td>
+<td>16.6km/h</td>
+<td>14.5km/h</td>
+<td>12.1km/h</td>
+<td>13.8km/h</td>
+<td>11.7km/h</td>
+<td>8.3km/h</td>
+<td>10.4km/h</td>
+<td>7.2km/h</td>
+<td>7.4km/h</td>
 </tr>
 <tr class="odd">
 <td>Précipitations</td>
@@ -838,54 +838,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even" style="background-color : white">
 <td>Humidité</td>
-<td style="background-color: rgb(127,177,236,0.67); font-weight: bold">67%</td>
-<td style="background-color: rgb(127,177,236,0.61); font-weight: bold">61%</td>
-<td style="background-color: rgb(127,177,236,0.62); font-weight: bold">62%</td>
-<td style="background-color: rgb(127,177,236,0.67); font-weight: bold">67%</td>
-<td style="background-color: rgb(127,177,236,0.75); font-weight: bold">75%</td>
-<td style="background-color: rgb(127,177,236,0.77); font-weight: bold">77%</td>
+<td style="background-color: rgb(127,177,236,0.88); font-weight: bold">88%</td>
+<td style="background-color: rgb(127,177,236,0.84); font-weight: bold">84%</td>
+<td style="background-color: rgb(127,177,236,0.84); font-weight: bold">84%</td>
+<td style="background-color: rgb(127,177,236,0.84); font-weight: bold">84%</td>
+<td style="background-color: rgb(127,177,236,0.83); font-weight: bold">83%</td>
+<td style="background-color: rgb(127,177,236,0.81); font-weight: bold">81%</td>
+<td style="background-color: rgb(127,177,236,0.85); font-weight: bold">85%</td>
+<td style="background-color: rgb(127,177,236,0.88); font-weight: bold">88%</td>
+<td style="background-color: rgb(127,177,236,0.88); font-weight: bold">88%</td>
+<td style="background-color: rgb(127,177,236,0.84); font-weight: bold">84%</td>
 <td style="background-color: rgb(127,177,236,0.78); font-weight: bold">78%</td>
-<td style="background-color: rgb(127,177,236,0.79); font-weight: bold">79%</td>
-<td style="background-color: rgb(127,177,236,0.75); font-weight: bold">75%</td>
-<td style="background-color: rgb(127,177,236,0.66); font-weight: bold">66%</td>
-<td style="background-color: rgb(127,177,236,0.58); font-weight: bold">58%</td>
+<td style="background-color: rgb(127,177,236,0.7); font-weight: bold">70%</td>
+<td style="background-color: rgb(127,177,236,0.73); font-weight: bold">73%</td>
+<td style="background-color: rgb(127,177,236,0.52); font-weight: bold">52%</td>
+<td style="background-color: rgb(127,177,236,0.51); font-weight: bold">51%</td>
+<td style="background-color: rgb(127,177,236,0.52); font-weight: bold">52%</td>
 <td style="background-color: rgb(127,177,236,0.56); font-weight: bold">56%</td>
-<td style="background-color: rgb(127,177,236,0.47); font-weight: bold">47%</td>
-<td style="background-color: rgb(127,177,236,0.47); font-weight: bold">47%</td>
-<td style="background-color: rgb(127,177,236,0.49); font-weight: bold">49%</td>
-<td style="background-color: rgb(127,177,236,0.56); font-weight: bold">56%</td>
-<td style="background-color: rgb(127,177,236,0.57); font-weight: bold">57%</td>
-<td style="background-color: rgb(127,177,236,0.66); font-weight: bold">66%</td>
+<td style="background-color: rgb(127,177,236,0.62); font-weight: bold">62%</td>
+<td style="background-color: rgb(127,177,236,0.69); font-weight: bold">69%</td>
+<td style="background-color: rgb(127,177,236,0.69); font-weight: bold">69%</td>
+<td style="background-color: rgb(127,177,236,0.68); font-weight: bold">68%</td>
 <td style="background-color: rgb(127,177,236,0.69); font-weight: bold">69%</td>
 <td style="background-color: rgb(127,177,236,0.72); font-weight: bold">72%</td>
 <td style="background-color: rgb(127,177,236,0.79); font-weight: bold">79%</td>
-<td style="background-color: rgb(127,177,236,0.8); font-weight: bold">80%</td>
-<td style="background-color: rgb(127,177,236,0.83); font-weight: bold">83%</td>
-<td style="background-color: rgb(127,177,236,0.84); font-weight: bold">84%</td>
 </tr>
 <tr class="odd" style="background-color : white">
 <td style="border-bottom-left-radius: 20px 20px" height="50">Couverture nuageuse</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.08); font-weight: bold">8%</td>
-<td style="background-color: rgb(169, 169, 169,0.13); font-weight: bold">13%</td>
-<td style="background-color: rgb(169, 169, 169,0.97); font-weight: bold">97%</td>
-<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
-<td style="background-color: rgb(169, 169, 169,0.21); font-weight: bold">21%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
-<td style="background-color: rgb(169, 169, 169,0.69); font-weight: bold">69%</td>
 <td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
 <td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,0.36); font-weight: bold">36%</td>
+<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
+<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
+<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
+<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
+<td style="background-color: rgb(169, 169, 169,0.0); font-weight: bold">0%</td>
+<td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
+<td style="background-color: rgb(169, 169, 169,0.11); font-weight: bold">11%</td>
 <td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
 <td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold">100%</td>
 <td style="background-color: rgb(169, 169, 169,1.0); font-weight: bold; border-bottom-right-radius: 20px 20px">100%</td>

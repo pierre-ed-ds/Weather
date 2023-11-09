@@ -54,14 +54,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="site-web-quarto" class="level2">
 <h2 class="anchored" data-anchor-id="site-web-quarto">Site web Quarto</h2>
 <p>Il est possible de consulter mon site sous l’adresse suivante: <a href="https://pierre-ed-ds.github.io/Weather/">pierre-ed-ds.github.io/Weather</a>.<br>
-Ce site à été deployé avec github pages et s’actualise automatiquement à 1h00, 8h00, 13h00 et 18h00.</p>
+Ce site à été deployé avec github pages et s’actualise automatiquement toutes les heures.</p>
 </section>
 <section id="base-de-données" class="level2">
 <h2 class="anchored" data-anchor-id="base-de-données">Base de données</h2>
 <p>Pour cela j’utiliserai les données de prévision météo du site <a href="open-meteo.com">open-meteo.com</a> que j’ai calibré à l’aide de la lattitude et de la longitude de Montpellier.</p>
 <ul>
-<li>Pour la page principale de mon site, j’utilise les données dites “daily” du weathercode et les données “hourly” de température, précipitation et de vitesse de vent.</li>
-<li>Pour la page donnant la météo dans la journée, j’utilise les données “hourly” du weathercode, de température, précipitation et de vitesse de vent</li>
+<li>Pour la page principale de mon site, j’utilise les données dites “daily” du weathercode, de la température minimale et maximale et les données “hourly” de température, précipitation et de vitesse de vent.</li>
+<li>Pour la page donnant la météo dans la journée, j’utilise les données “hourly” du weathercode, de température, précipitation et de vitesse de vent.</li>
 </ul>
 </section>
 <section id="appercu" class="level2">
@@ -107,11 +107,18 @@ Ce site à été deployé avec github pages et s’actualise automatiquement à 
 </table>
 <p>La base de donnée n’ayant que 4 jours de prevision, j’ai decidé d’afficher les données météo sur une plage de 7 jours en ajoutant donc 2 jours précédant la date actuelle.<br>
 Des éléments visuels ont été ajoutés au code pour rendre le tableau plus attrayant.<br>
-Il est également possible de naviguer entre la page de météo à la semaine et de météo detaillé du jour en utilisant le <span style="color: rgb(85, 215, 195);"> &lt; </span>, le <span style="color: rgb(85, 215, 195);"> &gt; </span>, ou bien simplement avec le menu du haut de la page.</p>
+Il est également possible de naviguer entre la page de météo à la semaine et de météo detaillé du jour en utilisant les lies hypertext en bleu dans les tableaux ou bien simplement avec le menu du haut de la page.</p>
 </section>
 <section id="icones-météo" class="level2">
 <h2 class="anchored" data-anchor-id="icones-météo">Icones météo</h2>
 <p>Pour réaliser ce projet, j’ai utilisé des icones météo sous format svg provenant du git suivant: <a href="https://github.com/erikflowers/weather-icons">github.com/erikflowers/weather-icons</a></p>
+</section>
+<section id="méthodologie" class="level2">
+<h2 class="anchored" data-anchor-id="méthodologie">Méthodologie</h2>
+<p>Après avoir extrait les données de l’API avec le package <code>Requests</code>, on les range dans des tableaux.<br>
+Comme on ne peut pas afficher d’images avec python, il a fallu créer une chaine de caractéres <code>HTML</code> dans lequel on insère nos éléments des tableaux.<br>
+Les données sur la vitesse du vent n’étant pas celles qu’on voulait, il a fallu les traiter pour en obtenir la moyenne.<br>
+</p>
 </section>
 </section>
 

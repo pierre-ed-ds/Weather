@@ -118,7 +118,9 @@ def imgcodehournight(i):
     match codeimage[i]:
         case 0:
             return "iconsmeteo/wi-night-clear.svg"
-        case 1 | 2:
+        case 1:
+            return "iconsmeteo/wi-night-alt-partly-cloudy.svg"
+        case 2:
             return "iconsmeteo/wi-night-alt-cloudy.svg"
         case 3:
             return "iconsmeteo/wi-cloud.svg"
@@ -196,8 +198,6 @@ def imagecodetot(i):
     else:
         return imgcodehournight(i)
 
-
-from IPython.display import Markdown
 from IPython.display import HTML
 from tabulate import tabulate
 
@@ -207,7 +207,7 @@ res = f"""
 <table class= "table1-style">
     <thead>
     <tr>  
-        <th  style="border-top-left-radius : 20px 20px"> {inttoday(0)} {date(0)} <br> <a href = index.qmd style="text-decoration:none">  < </a> Heures </th>
+        <th  style="border-top-left-radius : 20px 20px">    <a class=lien href = index.qmd style="text-decoration:none"> {inttoday(0)}  <br> {date(0)} </a></th>
         <th>  00:00 </th>
         <th>  01:00 </th>
         <th>  02:00 </th>
@@ -452,6 +452,6 @@ res = f"""
 
 </table>
 """
-display(HTML(res))
+HTML(res)
 ```
 

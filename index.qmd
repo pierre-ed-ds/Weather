@@ -40,7 +40,7 @@ else:
     fin = f"{end_date.year}-{end_date.month}-{end_date.day}"
 
 # copie de l'URL du site open-meteo avec les differents critères qui nous interessent
-url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&hourly=temperature_2m,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Europe%2FLondon&start_date={debut}&end_date={fin}"
+url = f"https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&hourly=temperature_2m,weathercode,precipitation,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Europe%2FLondon&start_date={debut}&end_date={fin}"
 
 # récuperation des données
 response = requests.get(url)
@@ -54,10 +54,15 @@ codeimage = data["hourly"]["weathercode"]
 codeimagetot = data["daily"]["weathercode"]
 mintemp = data["daily"]["temperature_2m_min"]
 maxtemp = data["daily"]["temperature_2m_max"]
-# temperatures min et max pour chaques jours (il y avait la possibilité de les obtenir "daily" mais j'ai fait ainsi)
-for i in range(7):
-    if sumpluie[i] == None:
-        sumpluie[i] = "Pas encore de données "
+pluie = data["hourly"]["precipitation"]
+
+
+pluie5 = 0 #pour gérer les données pas encore enregistrées
+for i in range(len(pluie)):
+    if pluie[i] == None:
+        pluie[i] = 0
+for i in range(24):
+    pluie5 += pluie[-24+i] #somme de la pluie des 24 heures du dernier jour
 
 # vent moyen pour chaques jours
 tabvent = np.zeros((7, 24))
@@ -78,7 +83,6 @@ for i in range(7):
         statistics.mean(tabvent[i]), 0
     )  # on ne garde pas de chiffres après la virgule car vue générale
 
-# précipitation totale par jours
 
 
 def inttoday(i):
@@ -201,8 +205,6 @@ def goutte(i):
     else:
         return ""
 
-
-from IPython.display import Markdown
 from IPython.display import HTML
 from tabulate import tabulate
 
@@ -214,7 +216,7 @@ res = f"""
         <th  style="border-top-left-radius : 20px 20px"> Jours </th>
         <th>  {inttoday(-2)} <br> <small> {date(-2)} </small></th>
         <th>  Hier <br> <small>{date(-1)}</small></th>
-        <th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)">   Aujourd'hui <a href = plus.qmd style="text-decoration:none">  > </a><br> <small>{date(0)}</small></th>
+        <th style="border-top:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)">   <a class=lien href = plus.qmd style="text-decoration:none"> Aujourd'hui <br> <small>{date(0)}</small> </a></th>
         <th>  Demain <br> <small>{date(1)}</small></th>
         <th>  {inttoday(2)} <br> <small>{date(2)}</small></th>
         <th>  {inttoday(3)} <br> <small>{date(3)}</small></th>
@@ -277,11 +279,11 @@ res = f"""
         <td> {goutte(3)} {sumpluie[3]}mm </td>
         <td> {goutte(4)} {sumpluie[4]}mm </td>
         <td> {goutte(5)} {sumpluie[5]}mm </td>
-        <td style="border-bottom-right-radius : 20px 20px"> {goutte(6)} {sumpluie[6]}mm </td>
+        <td style="border-bottom-right-radius : 20px 20px"> {goutte(6)} {pluie5}mm </td>
     </tr>
     </tbody>
 
 </table>
 """
-display(HTML(res))
+HTML(res)
 ```
