@@ -49,23 +49,40 @@ ul.task-list li input[type="checkbox"] {
 <h1>Météo Montpellier</h1>
 <section id="objectif" class="level2">
 <h2 class="anchored" data-anchor-id="objectif">Objectif</h2>
-<p>Le but de ce site est d’afficher les prévisions météo de montpellier sur un intervalle de quatre jours.</p>
+<p>Le but de ce site est d’afficher les prévisions météo de montpellier sur un intervalle de cinq jours.</p>
 </section>
 <section id="site-web-quarto" class="level2">
 <h2 class="anchored" data-anchor-id="site-web-quarto">Site web Quarto</h2>
 <p>Il est possible de consulter mon site sous l’adresse suivante: <a href="https://pierre-ed-ds.github.io/Weather/">pierre-ed-ds.github.io/Weather</a>.<br>
-Ce site à été deployé avec github pages et s’actualise automatiquement toutes les heures.</p>
+Ce site a été deployé avec github pages et s’actualise automatiquement toutes les heures.</p>
 </section>
-<section id="base-de-données" class="level2">
-<h2 class="anchored" data-anchor-id="base-de-données">Base de données</h2>
+<section id="méthodologie" class="level2">
+<h2 class="anchored" data-anchor-id="méthodologie">Méthodologie</h2>
+<ul>
+<li>Avec <code>Quarto</code>, il est possible de créer un site efficacement en y intégrant du code. J’ai donc basé la plupart de mon code sur python.<br>
+</li>
+<li>Tout d’abord, en utilisant le module <code>datetime</code> il est possible de recupérer la date actuelle et de modifier l’URL de l’API avec les dates qui nous intéressent.<br>
+</li>
+<li>Après avoir extrait les données de l’API avec le package <code>Requests</code>, on les range dans des tableaux.<br>
+</li>
+<li>Comme on ne peut pas trop gérer l’esthétique sur python, il a fallu créer une chaine de caractéres <code>HTML</code> dans lequel on insère nos éléments des tableaux avec par exemple <code>{tableau_vent[0]}</code> et nos images avec <code>&lt; src = chemin/image.svg /&gt;</code>.<br>
+</li>
+<li>En utilisant un fichier <code>CSS</code>, il a été possible de modifier les aspect graphiques de mon tableau affichant la météo.</li>
+<li>Les données sur la vitesse du vent n’étant pas celles qu’on voulait, il a fallu les traiter pour en obtenir la moyenne.<br>
+</li>
+<li>Enfin pour ce qui est des modifications de couleurs en fonction des valeurs de l’API, il a fallu créer des fonction appropriées qui agissent sur les entiers des codages couleurs en RGBA.</li>
+<li>Le déploiement du site se fait à l’aide de github pages et s’actualise avec le programme <code>CRON</code> dans un fichier <code>.github/workflows/publish.yml</code>.</li>
+</ul>
+<section id="base-de-données" class="level3">
+<h3 class="anchored" data-anchor-id="base-de-données">Base de données</h3>
 <p>Pour cela j’utiliserai les données de prévision météo du site <a href="open-meteo.com">open-meteo.com</a> que j’ai calibré à l’aide de la lattitude et de la longitude de Montpellier.</p>
 <ul>
 <li>Pour la page principale de mon site, j’utilise les données dites “daily” du weathercode, de la température minimale et maximale et les données “hourly” de température, précipitation et de vitesse de vent.</li>
 <li>Pour la page donnant la météo dans la journée, j’utilise les données “hourly” du weathercode, de température, précipitation et de vitesse de vent.</li>
 </ul>
 </section>
-<section id="appercu" class="level2">
-<h2 class="anchored" data-anchor-id="appercu">Appercu</h2>
+<section id="appercu" class="level3">
+<h3 class="anchored" data-anchor-id="appercu">Appercu</h3>
 <p>A chaques jours sont associés en fonction des données de l’API:</p>
 <table class="table">
 <colgroup>
@@ -109,16 +126,10 @@ Ce site à été deployé avec github pages et s’actualise automatiquement tou
 Des éléments visuels ont été ajoutés au code pour rendre le tableau plus attrayant.<br>
 Il est également possible de naviguer entre la page de météo à la semaine et de météo detaillé du jour en utilisant les lies hypertext en bleu dans les tableaux ou bien simplement avec le menu du haut de la page.</p>
 </section>
-<section id="icones-météo" class="level2">
-<h2 class="anchored" data-anchor-id="icones-météo">Icones météo</h2>
+<section id="icones-météo" class="level3">
+<h3 class="anchored" data-anchor-id="icones-météo">Icones météo</h3>
 <p>Pour réaliser ce projet, j’ai utilisé des icones météo sous format svg provenant du git suivant: <a href="https://github.com/erikflowers/weather-icons">github.com/erikflowers/weather-icons</a></p>
 </section>
-<section id="méthodologie" class="level2">
-<h2 class="anchored" data-anchor-id="méthodologie">Méthodologie</h2>
-<p>Après avoir extrait les données de l’API avec le package <code>Requests</code>, on les range dans des tableaux.<br>
-Comme on ne peut pas afficher d’images avec python, il a fallu créer une chaine de caractéres <code>HTML</code> dans lequel on insère nos éléments des tableaux.<br>
-Les données sur la vitesse du vent n’étant pas celles qu’on voulait, il a fallu les traiter pour en obtenir la moyenne.<br>
-</p>
 </section>
 </section>
 
