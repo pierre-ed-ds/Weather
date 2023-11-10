@@ -170,6 +170,8 @@ def couleur(temp):
     """
     Associe une couleur en fonction de la température sous le format RGB.
     """
+    if temp == None:
+        return "rgb(255, 255, 255,0.5)"
     if temp <= 0:
         return "rgb(102, 183, 213,0.5)"
     if 0 < temp <= 5:
@@ -263,23 +265,23 @@ res = f"""
     </tr>
     <tr> 
         <td> Vitesse moyenne du vent </td>
-        <td> {int(moyvent[0])}km/h </td>
-        <td> {int(moyvent[1])}km/h </td>
-        <td style="border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {int(moyvent[2])}km/h </td>
+        <td> {int(moyvent[0])} km/h </td>
+        <td> {int(moyvent[1])} km/h </td>
+        <td style="border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {int(moyvent[2])} km/h </td>
         <td> {int(moyvent[3])} km/h </td>
         <td> {int(moyvent[4])} km/h </td>
         <td> {int(moyvent[5])} km/h </td>
-        <td> {(moyvent[6])} km/h </td>
+        <td> {int(moyvent[6])} km/h </td>
     </tr>
     <tr> 
         <td style="border-bottom-left-radius : 20px 20px"> Précipitations </td>
-        <td> {goutte(0)} {sumpluie[0]}mm </td>
-        <td> {goutte(1)} {sumpluie[1]}mm </td>
-        <td style="border-bottom:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {goutte(2)} {sumpluie[2]}mm </td>
-        <td> {goutte(3)} {sumpluie[3]}mm </td>
-        <td> {goutte(4)} {sumpluie[4]}mm </td>
-        <td> {goutte(5)} {sumpluie[5]}mm </td>
-        <td style="border-bottom-right-radius : 20px 20px"> {goutte(6)} {pluie5}mm </td>
+        <td> {goutte(0)} {sumpluie[0]} mm </td>
+        <td> {goutte(1)} {sumpluie[1]} mm </td>
+        <td style="border-bottom:3px solid rgb(85, 215, 195,0.5);border-right:3px solid rgb(85, 215, 195,0.5);border-left:3px solid rgb(85, 215, 195,0.5)"> {goutte(2)} {sumpluie[2]} mm </td>
+        <td> {goutte(3)} {sumpluie[3]} mm </td>
+        <td> {goutte(4)} {sumpluie[4]} mm </td>
+        <td> {goutte(5)} {sumpluie[5]} mm </td>
+        <td style="border-bottom-right-radius : 20px 20px"> {goutte(6)} {pluie5} mm </td>
     </tr>
     </tbody>
 
