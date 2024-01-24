@@ -1,1 +1,1 @@
-Sitemap: https://github.com/pierre-ed-ds/Weather/sitemap.xml
+Sitemap: https://pierre-ed-ds.github.io/Weather/sitemap.xml
